@@ -1,0 +1,107 @@
+@import "partials/normalize";
+
+$lgreen: #D0FED0;
+$lred: #FDC9C9;
+$lorange: #FCDDA2;
+
+
+body.mp_wait, body.mp_wait *{
+    cursor: wait !important;   
+}
+
+
+body{background-color:#dddddd; height:auto; min-height:100%;}
+
+.clear {clear:both; overflow: hidden; font-size:0; height:1px;}
+
+header {
+    padding:1px; background-color:black; color:white; font-family: courier; position:relative;
+    h1 {font-size:18px; float:left;  line-height:18px; margin:10px; font-weight:normal; max-width:75%;}
+    
+    // jump out button
+    a {
+        cursor:pointer; display:inline-block; 
+              font-size:12px; line-height:24px; text-align:center; border:1px solid white;
+              float:right; margin: 7px 7px 0px 0px; padding: 0px 5px;
+    }
+    #jumpout {display:none;}
+}
+
+
+#content {
+    .mp_refresh {float:right; font-size:12px; text-decoration:underline; cursor:pointer; text-decoration:none;
+        &:hover {text-decoration:underline;}
+    }
+    
+    
+    
+    .zone {
+        display:block; margin:20px; border:1px solid blue;
+        h2 {
+            background-color:blue; display:block;color:white; margin:0; padding:5px 0px 5px 20px; text-align: 
+            center; text-align: left; font-weight:normal; font-size:18px; line-height:24px; 
+        
+        }
+    
+            .mp_refresh {line-height:24px; margin-right:20px;}
+    
+    }
+    
+    .location {
+        display:block; margin:20px;
+        
+        h2 {
+            border-bottom:1px solid blue; background:none; display:block;color:blue; margin:0; padding:0px; text-align: 
+            center; text-align: left; font-weight:normal; font-size:17px; line-height:22px;
+        
+        }
+    
+        .mp_refresh {line-height:22px; margin-right:0px;}
+    }
+    
+    .monster {
+        display:inline-block; padding:5px 00px; margin:10px 10px 00px 00px; background-color:silver;
+        min-width:100px;
+        h4 {display:block; padding:0px; margin:0px 10px; text-align:center; font-weight:normal;}
+        
+        .progress {
+            text-align:center; margin:0px 5px;
+            span {border:none; background-color:red; display:inline-block; width:30%; height:10px;  margin:0px 0px; .progress span {background-color:red;}}
+            span.two {margin:0px 2px;}
+        }
+        
+        
+        &[data-progress="-1"] {
+            background-color:silver; 
+            .progress span {background-color:gray;}
+        }
+        &[data-progress="0"] {
+            background-color:$lred;
+            
+        }
+        &[data-progress="1"] {
+            background-color:$lorange;
+            .progress span.one { background-color:green;}
+        }
+        &[data-progress="2"] {
+            background-color:$lorange;
+            .progress span.one {background-color:green;}
+            .progress span.two {background-color:green;}
+        }
+        &[data-progress="3"] {
+            background-color:$lgreen;
+            .progress span { background-color:green;}
+        
+        }
+    }
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+}
