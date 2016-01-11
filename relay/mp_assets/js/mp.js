@@ -44,7 +44,30 @@ function process_monster_list(data) {
             var monster = jQuery("<div><h4>" + monster_name + "</h4><div class=\"progress\"><span class=\"one\"></span><span class=\"two\"></span><span class=\"three\"></span></div></div>")
                 .addClass("monster")
                 .attr("data-monstername",value.mp_monster_name)
-                .attr("data-progress",value.mp_factoids);
+                .attr("data-progress",value.mp_factoids)
+                .attr("data-frequency",value.mp_frequency);
+        
+            // look at the frequency
+            var frequency = parseFloat(value.mp_frequency);
+            var freq_type = "unknown";
+            
+            if(frequency < 6) {
+                freq_type = "low";
+            } else {
+                freq_type="normal";
+            }
+            if(frequency == 0) {freq_type = "boss/one-time";}
+            if(frequency == -1) {freq_type = "ultra rare";}
+            
+            monster.attr("data-frequency-type",freq_type);
+            
+            // add frequency to monster item
+            var f = jQuery("<div class=\"freq " + freq_type + "\"></div>");
+            if(freq_type == "normal" || freq_type == "low") {
+                f.html(freq_type + ": " + +frequency.toFixed(2));
+            } else {f.html(freq_type);}
+            monster.append(f);
+
             location.append(monster);
         }
         

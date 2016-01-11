@@ -6,6 +6,7 @@ record monster_item {
 	string mp_location_name;
 	string mp_zone_name;
 	int mp_factoids;
+	float mp_frequency;
 };
 
  monster_item[int] get_monsters() {
@@ -25,13 +26,14 @@ record monster_item {
 			
 
 		// compile monster data into record
-		foreach mob in mobs {
+		foreach mob, freq in mobs {
 			monster_item m;
 			m.mp_monster_id = mob.id;
 			m.mp_monster_name = mob.manuel_name;
 			m.mp_location_name = l.to_string();
 			m.mp_zone_name = l.zone;
 			m.mp_factoids = monster_factoids_available(mob,true);
+			m.mp_frequency = freq;
 			monster_items[i] = m;
 			i=i+1;
 		}

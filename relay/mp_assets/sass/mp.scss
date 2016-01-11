@@ -15,7 +15,7 @@ body{background-color:#dddddd; height:auto; min-height:100%;}
 .clear {clear:both; overflow: hidden; font-size:0; height:1px;}
 
 header {
-    padding:1px; background-color:black; color:white; font-family: courier; position:relative;
+    padding:1px; background-color:black; color:white; font-family: courier; position:fixed; width:100%; top:0; left:0;
     h1 {font-size:18px; float:left;  line-height:18px; margin:10px; font-weight:normal; max-width:75%;}
     
     // jump out button
@@ -29,6 +29,8 @@ header {
 
 
 #content {
+    
+    padding-top:30px; 
     .mp_refresh {float:right; font-size:12px; text-decoration:underline; cursor:pointer; text-decoration:none;
         &:hover {text-decoration:underline;}
     }
@@ -61,8 +63,8 @@ header {
     
     .monster {
         display:inline-block; padding:5px 00px; margin:10px 10px 00px 00px; background-color:silver;
-        min-width:100px;
-        h4 {display:block; padding:0px; margin:0px 10px; text-align:center; font-weight:normal;}
+        min-width:100px; text-align: center;
+        h4 {display:block; font-weight:bold; padding:0px; margin:0px 10px; text-align:center; font-weight:normal;}
         
         .progress {
             text-align:center; margin:0px 5px;
@@ -93,6 +95,12 @@ header {
             .progress span { background-color:green;}
         
         }
+        
+        
+        .freq {font-size:10px; display:inline-block; margin:0px auto; color:white; background-color:gray; text-align:center; padding:2px 5px;}
+        &[data-frequency-type="ultra rare"] {.freq{background-color:magenta;}}
+        &[data-frequency-type="boss/one-time"] {.freq{background-color:purple;}}
+        &[data-frequency-type="low"] {.freq{background-color:orange;}}
     }
     
 
