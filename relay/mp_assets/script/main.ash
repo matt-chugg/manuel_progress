@@ -12,13 +12,21 @@ record monster_item {
  monster_item[int] get_monsters() {
 	int i = 0; monster_item[int] monster_items;
 	foreach l in $locations[] {
+		// skip some locations completely
+		// skip removed areas unless specific property says not to
+		if(l.parent.to_lower_case() == "removed" && (get_property("mskc_mp_show_removed_areas") != true)) {continue;}
+		
+	
 		// get all monsters in location
 		float [monster] mobs = appearance_rates(l);
 	
 		// tidy up the mob list 
-		foreach mob in mobs {
+		foreach mob,freq in mobs {
 			// remove non combats
-			if(mob == $monster[none]  ) {remove mobs[mob];}
+			if(mob == $monster[none]  ) {remove mobs[mob]; continue;}
+			
+			// remove ulrtra rares
+			if(freq == -1) {remove mobs[mob]; continue;}
 		}
 	
 		// skip location if there is nothing useful there
@@ -35,7 +43,7 @@ record monster_item {
 			m.mp_factoids = monster_factoids_available(mob,true);
 			m.mp_frequency = freq;
 			monster_items[i] = m;
-			i=i+1;
+			i=i+1; 
 		}
 	}
 

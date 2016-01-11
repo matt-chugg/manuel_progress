@@ -57,7 +57,9 @@ function process_monster_list(data) {
                 freq_type="normal";
             }
             if(frequency == 0) {freq_type = "boss/one-time";}
-            if(frequency == -1) {freq_type = "ultra rare";}
+            
+            // all UR should be removed before now
+            //if(frequency == -1) {freq_type = "ultra rare";}
             
             monster.attr("data-frequency-type",freq_type);
             
@@ -192,4 +194,5 @@ jQuery(document).ready(function() {
     mp_do_binds();
     mp_init();
 });
+
 

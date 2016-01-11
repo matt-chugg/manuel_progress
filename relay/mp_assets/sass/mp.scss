@@ -6,11 +6,11 @@ $lorange: #FCDDA2;
 
 
 body.mp_wait, body.mp_wait *{
-    cursor: wait !important;   
+    cursor: wait !important;
 }
 
 
-body{background-color:#dddddd; height:auto; min-height:100%;}
+body{background-color:#eeeeee; height:auto; min-height:100%;}
 
 .clear {clear:both; overflow: hidden; font-size:0; height:1px;}
 
@@ -93,18 +93,18 @@ header {
         &[data-progress="3"] {
             background-color:$lgreen;
             .progress span { background-color:green;}
-        
         }
         
         
         .freq {font-size:10px; display:inline-block; margin:0px auto; color:white; background-color:gray; text-align:center; padding:2px 5px;}
-        &[data-frequency-type="ultra rare"] {.freq{background-color:magenta;}}
+        
         &[data-frequency-type="boss/one-time"] {.freq{background-color:purple;}}
         &[data-frequency-type="low"] {.freq{background-color:orange;}}
     }
     
 
     
+    
 
     
     
@@ -112,4 +112,4 @@ header {
     
     
     
-}
+} 
