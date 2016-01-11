@@ -1,17 +1,10 @@
 @import "partials/normalize";
 
-$lgreen: #D0FED0;
-$lred: #FDC9C9;
-$lorange: #FCDDA2;
+$lgreen: #D0FED0; $lred: #FDC9C9; $lorange: #FCDDA2;
 
 
-body.mp_wait, body.mp_wait *{
-    cursor: wait !important;
-}
-
-
+body.mp_wait, body.mp_wait *{cursor: wait !important;}
 body{background-color:#eeeeee; height:auto; min-height:100%;}
-
 .clear {clear:both; overflow: hidden; font-size:0; height:1px;}
 
 header {
@@ -31,6 +24,7 @@ header {
 #content {
     
     padding-top:30px; 
+    
     .mp_refresh {float:right; font-size:12px; text-decoration:underline; cursor:pointer; text-decoration:none;
         &:hover {text-decoration:underline;}
     }
@@ -42,10 +36,9 @@ header {
         h2 {
             background-color:blue; display:block;color:white; margin:0; padding:5px 0px 5px 20px; text-align: 
             center; text-align: left; font-weight:normal; font-size:18px; line-height:24px; 
-        
         }
     
-            .mp_refresh {line-height:24px; margin-right:20px;}
+        .mp_refresh {line-height:24px; margin-right:20px;}
     
     }
     
@@ -104,10 +97,19 @@ header {
     
 
     
-    
+    div[data-area-completed="true"]>h2 a.mp_refresh {display:none;visibility:hidden;}
 
+    &.hide_completed_areas {
+        div[data-area-completed="true"] {
+            display:none; visibility:hidden;
+        }
+    }
     
-    
+    &.hide_nearly_completed_areas {
+        div[data-area-nearly-completed="true"] {
+            display:none; visibility:hidden;
+        }
+    }
     
     
     

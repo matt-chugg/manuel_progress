@@ -1,21 +1,15 @@
+/* global top */
 
-
-
-
-
-
-
-
-
+/* process the list of monsters from mafia */
 function process_monster_list(data) {
     jQuery.each(data,function(key,value) {
         var zone_name = String(value.mp_zone_name);
         var location_name = String(value.mp_location_name);
         var monster_name = String(value.mp_monster_name);
         
-        if(zone_name == "") {zone_name == "unknown zone";}
-        if(location_name == "") {location_name == "unknown location";}
-        if(monster_name == "") {return true;}
+        if(zone_name === "") {zone_name = "unknown zone";}
+        if(location_name === "") {location_name = "unknown location";}
+        if(monster_name === "") {return true;}
         
         // add / find the zone
         if(jQuery("#content>.zone[data-zonename=\"" + zone_name + "\"]").length === 0) {
@@ -25,7 +19,7 @@ function process_monster_list(data) {
             jQuery("#content").append(zone);
         }
         zone = jQuery("#content>.zone[data-zonename=\"" + zone_name + "\"]");
-        if(zone.length != 1) {alert("Zone error"); return false;}
+        if(zone.length !== 1) {alert("Zone error"); return false;}
         
         
         // add/find location
@@ -36,7 +30,7 @@ function process_monster_list(data) {
             zone.append(location);
         }
         var location = zone.children(".location[data-locationname=\"" + location_name + "\"]");
-        if(location.length != 1) {alert("location error"); return false;}
+        if(location.length !== 1) {alert("location error"); return false;}
         
         
         // add/update the monster
@@ -56,7 +50,7 @@ function process_monster_list(data) {
             } else {
                 freq_type="normal";
             }
-            if(frequency == 0) {freq_type = "boss/one-time";}
+            if(frequency === 0) {freq_type = "boss/one-time";}
             
             // all UR should be removed before now
             //if(frequency == -1) {freq_type = "ultra rare";}
@@ -65,7 +59,7 @@ function process_monster_list(data) {
             
             // add frequency to monster item
             var f = jQuery("<div class=\"freq " + freq_type + "\"></div>");
-            if(freq_type == "normal" || freq_type == "low") {
+            if(freq_type === "normal" || freq_type === "low") {
                 f.html(freq_type + ": " + +frequency.toFixed(2));
             } else {f.html(freq_type);}
             monster.append(f);
@@ -74,7 +68,7 @@ function process_monster_list(data) {
         }
         
         var monster = location.children(".monster[data-monstername=\"" + value.mp_monster_name + "\"]");
-        if(monster.length != 1) {alert("monster error"); return false;}
+        if(monster.length !== 1) {alert("monster error"); return false;}
         
         monster.attr("data-progress",value.mp_factoids);
         
@@ -84,15 +78,13 @@ function process_monster_list(data) {
     });
     
     
-    //hide and show refresh
+    //zone and location complete status
     jQuery(".zone,.location").each(function() {
-        $l = jQuery(this);
-        
-        if($l.find(".monster[data-progress=1],.monster[data-progress=2],.monster[data-progress=0]").length==0) {
-            $l.children("h2").find(".mp_refresh").hide();
-        } else {
-            $l.children("h2").find(".mp_refresh").show();
+        jQuery(this).attr("data-area-completed",jQuery(this).find(".monster[data-progress=1],.monster[data-progress=2],.monster[data-progress=0]").length===0);
+        if(jQuery(this).attr("data-area-completed") !== "true" && jQuery(this).find(".monster[data-progress=1],.monster[data-progress=2],.monster[data-progress=0]").not("[data-frequency=0]").length===0) {
+            jQuery(this).attr("data-area-nearly-completed","true");
         }
+        
     });
     
                     
@@ -110,7 +102,7 @@ function mp_update_monsters(updatepages) {
         data: {"ajax": "true", "request": "monsters", "pages":updatepages},
         success: function(data) {
             if(data.status) {
-                if(data.status == "ok") {
+                if(data.status === "ok") {
                     if(data.data) {process_monster_list(data.data);} else {alert("No data returned")}
                 } else {
                     alert(data.status + " : " + data.data);
@@ -170,7 +162,7 @@ function mp_do_binds() {
             console.log(letter);
             if(!/^[a-z]$/g.test(letter)) {letter = "-";}
             if(pages.indexOf(letter) == -1) {
-                if(pages !== "") {pages = pages + ","}
+                if(pages !== "") {pages = pages + ",";}
                 pages = pages + letter;
             }
         });

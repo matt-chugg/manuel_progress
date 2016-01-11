@@ -99,7 +99,11 @@ void render_page() {
 
     // header and content div
     writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + "</h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><div class=\"clear\">&nbsp;</div></header>");
-    writeln("<div id=\"content\"></div>");
+	string content_class="";
+	if (get_property("mskc_mp_hide_completed_areas") == true) {content_class += "hide_completed_areas ";}
+	
+	content_class = content_class + (get_property("mskc_mp_hide_nearly_completed_areas") == true ? "hide_nearly_completed_areas " : "" );
+    writeln("<div id=\"content\" class=\"" + content_class + "\"></div>");
     
     // end the page
     finish_page();
