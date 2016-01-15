@@ -159,14 +159,13 @@ function mp_do_binds() {
              
             
             var letter = jQuery(this).attr("data-monstername").substring(0,1).toLowerCase();
-            console.log(letter);
+            
             if(!/^[a-z]$/g.test(letter)) {letter = "-";}
             if(pages.indexOf(letter) == -1) {
                 if(pages !== "") {pages = pages + ",";}
                 pages = pages + letter;
             }
         });
-        
         mp_update_monsters(pages);
         
     });
