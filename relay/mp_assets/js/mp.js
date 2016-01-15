@@ -155,7 +155,7 @@ function mp_do_binds() {
         e.preventDefault();
         // construct string
         var pages = ""; 
-        jQuery(this).closest("div,form,body").find(".monster").not("[data-progress=3]").each(function(){
+        jQuery(this).closest("div,form,body").find(".monster:visible").not("[data-progress=3]").each(function(){
              
             
             var letter = jQuery(this).attr("data-monstername").substring(0,1).toLowerCase();
