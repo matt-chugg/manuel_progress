@@ -34,25 +34,25 @@ record monster_item {
 		// skip location if there is nothing useful there
 		if(count(mobs) < 1) {continue;}
 			
-
 		// compile monster data into record
 		foreach mob, freq in mobs {
 			monster_item m;
+			
 			m.mp_monster_id = mob.id;
 			m.mp_monster_name = mob.manuel_name;
 			m.mp_location_name = l.to_string();
 			m.mp_zone_name = l.zone;
 			m.mp_factoids = monster_factoids_available(mob,true);
 			m.mp_frequency = freq;
-			monster_items[i] = m;
 			m.mp_semirare = index_of(mob.attributes.to_lower_case(),"semirare") > -1;
 			m.mp_boss = mob.boss;
-			i=i+1; 
+			
+			// store the monster after adding all records
+			monster_items[i] = m; i=i+1;
 		}
 	}
-
+	// return full list of monsters
 	return monster_items;
-
 }
 
 
@@ -65,13 +65,11 @@ void handle_ajax(string[string] fields) {
 			print(page);
 			visit_url( "questlog.php?which=6&vl=" + page.to_lower_case() );
 		}
-		
 	}
 	
-    			
+    // get list of monsters if requested
     if(fields["request"] == "monsters") {
 		monster_item[int] monster_items = get_monsters();
-		
 		// send record as json
 		writeln("{\"status\":\"ok\",\"data\":" + monster_items.to_json() + "}");
         return;    
