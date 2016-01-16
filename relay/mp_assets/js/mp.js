@@ -155,8 +155,8 @@ function mp_do_binds() {
     });
     
     jQuery(document).on("click",".mp_refresh",function(e){
-
-        e.preventDefault();
+        
+        e.preventDefault(); e.stopPropagation();
         // construct string
         var pages = ""; 
         jQuery(this).closest("div,form,body").find(".monster:visible").not("[data-progress=3]").each(function(){
@@ -165,13 +165,18 @@ function mp_do_binds() {
             var letter = jQuery(this).attr("data-monstername").substring(0,1).toLowerCase();
             
             if(!/^[a-z]$/g.test(letter)) {letter = "-";}
-            if(pages.indexOf(letter) == -1) {
+            if(pages.indexOf(letter) === -1) {
                 if(pages !== "") {pages = pages + ",";}
                 pages = pages + letter;
             }
         });
         mp_update_monsters(pages);
         
+    });
+    
+    jQuery(document).on("click",".zone>h2",function(e){
+       e.preventDefault();
+       jQuery(this).parent(".zone").toggleClass("mp_min");
     });
     
     

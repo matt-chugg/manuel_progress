@@ -32,14 +32,15 @@ header {
     
     
     .zone {
-        display:block; margin:20px; border:1px solid blue;
+        display:block; margin:20px; border:1px solid blue; overflow:hidden;
         h2 {
             background-color:blue; display:block;color:white; margin:0; padding:5px 0px 5px 20px; text-align: 
-            center; text-align: left; font-weight:normal; font-size:18px; line-height:24px; 
+            center; text-align: left; font-weight:normal; font-size:18px; line-height:24px; cursor:pointer;
         }
     
         .mp_refresh {line-height:24px; margin-right:20px;}
     
+        &.mp_min {height:34px;}
     }
     
     .location {
@@ -47,7 +48,7 @@ header {
         
         h2 {
             border-bottom:1px solid blue; background:none; display:block;color:blue; margin:0; padding:0px; text-align: 
-            center; text-align: left; font-weight:normal; font-size:17px; line-height:22px;
+            center; text-align: left; font-weight:normal; font-size:17px; line-height:22px; cursor: auto;
         
         }
     
