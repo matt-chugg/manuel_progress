@@ -56,8 +56,8 @@ function process_monster_list(data) {
             if(value.mp_semirare) {freq_type="semi-rare";}
             // is boss
             if(value.mp_boss) {freq_type="boss";}
-            // all UR should be removed before now
-            //if(frequency == -1) {freq_type = "ultra rare";}
+            // is special
+            if(value.mp_special) {freq_type="special";}
             
             monster.attr("data-frequency-type",freq_type);
             
@@ -65,7 +65,14 @@ function process_monster_list(data) {
             var f = jQuery("<div class=\"freq " + freq_type + "\"></div>");
             if(freq_type === "normal" || freq_type === "low") {
                 f.html(freq_type + ": " + +frequency.toFixed(2));
-            } else {f.html(freq_type);}
+            } else if (freq_type === "special") {
+                f.html("special");
+                var mp_info = String(value.mp_information);
+                if(mp_info !== "" && mp_info !== "undefined") {
+                    f.attr("data-tip",mp_info).addClass("tip");
+                }
+            }
+            else {f.html(freq_type);}
             monster.append(f);
 
             location.append(monster);
@@ -91,6 +98,7 @@ function process_monster_list(data) {
         
     });
     
+    jQuery(".tip").tipr();
                     
 }
 
@@ -174,12 +182,19 @@ function mp_do_binds() {
         
     });
     
+    // toggle minimize
     jQuery(document).on("click",".zone>h2",function(e){
        e.preventDefault();
        jQuery(this).parent(".zone").toggleClass("mp_min");
     });
     
+
     
+
+
+
+
+
 }
 
 

@@ -9,10 +9,23 @@ record monster_item {
 	float mp_frequency;
 	boolean mp_semirare;
 	boolean mp_boss;
+	boolean mp_special;
+	string mp_information;
+};
+
+// record to hold special info
+record special_monster_item {
+	string mp_type;
+	string mp_info;
 };
 
  monster_item[int] get_monsters() {
 	int i = 0; monster_item[int] monster_items;
+	
+	// load special monster data
+	special_monster_item[string] special_monsters; file_to_map("mskc_mp_monsters.txt",special_monsters);
+
+	
 	foreach l in $locations[] {
 		// skip some locations completely
 		// skip removed areas unless specific property says not to
@@ -22,20 +35,16 @@ record monster_item {
 		// get all monsters in location
 		float [monster] mobs = appearance_rates(l);
 	
-		// tidy up the mob list 
-		foreach mob,freq in mobs {
-			// remove non combats
-			if(mob == $monster[none]  ) {remove mobs[mob]; continue;}
-			
-			// remove ulrtra rares
-			if(freq == -1) {remove mobs[mob]; continue;}
-		}
-	
+
+
 		// skip location if there is nothing useful there
 		if(count(mobs) < 1) {continue;}
 			
 		// compile monster data into record
 		foreach mob, freq in mobs {
+			// remove non combats and ultra rares
+			if(mob == $monster[none] ||  freq == -1 ) {continue;}
+
 			monster_item m;
 			
 			m.mp_monster_id = mob.id;
@@ -46,6 +55,26 @@ record monster_item {
 			m.mp_frequency = freq;
 			m.mp_semirare = index_of(mob.attributes.to_lower_case(),"semirare") > -1;
 			m.mp_boss = mob.boss;
+			m.mp_special = false;
+			m.mp_information = "";
+			
+			// check for special cases
+			if(freq ==0 && special_monsters contains mob.to_string()) {
+			
+				// override boss record
+				if(special_monsters[mob.to_string()].mp_type.to_lower_case() == "boss") {
+					m.mp_boss = true;
+				}
+				
+				// set special flag
+				if(special_monsters[mob.to_string()].mp_type.to_lower_case() == "special") {
+					m.mp_special = true;
+				}
+				
+				// add any extra information
+				m.mp_information = special_monsters[mob.to_string()].mp_info;
+			
+			}
 			
 			// store the monster after adding all records
 			monster_items[i] = m; i=i+1;
@@ -91,9 +120,10 @@ void render_page() {
 
     // css styles
     writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/mp.css\" />");
-
+writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/tipr.css\" />");
     // javascript
     writeln("<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js\"></script>");
+	writeln("<script src=\"mp_assets/js/tipr.min.js\"></script>");
     writeln("<script src=\"mp_assets/js/mp.js\"></script>");
 
     // </head><body>

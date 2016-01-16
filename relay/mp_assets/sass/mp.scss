@@ -93,7 +93,8 @@ header {
         .freq {font-size:10px; display:inline-block; margin:0px auto; text-transform:lowercase; color:white; background-color:#010D74; text-align:center; padding:2px 5px;}
         
         &[data-frequency-type="one-time?"] {.freq{background-color:purple;}}
-        &[data-frequency-type="one-time?"] {.freq{background-color:purple;}}
+        &[data-frequency-type="one-time"] {.freq{background-color:purple;}}
+        &[data-frequency-type="special"] {.freq{background-color:#E50F0F; cursor: pointer;}}
         &[data-frequency-type="boss"] {.freq{background-color:#028FA1;}}
         &[data-frequency-type="semi-rare"] {.freq{background-color:magenta;}}
         &[data-frequency-type="low"] {.freq{background-color:orange;}}
@@ -119,3 +120,16 @@ header {
     
     
 } 
+
+.tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:12px Arial;
+}
+
+
