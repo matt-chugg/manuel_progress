@@ -50,8 +50,12 @@ function process_monster_list(data) {
             } else {
                 freq_type="normal";
             }
-            if(frequency === 0) {freq_type = "boss/one-time";}
             
+            if(frequency === 0) {freq_type = "one-time?";}
+            // is semi rare 
+            if(value.mp_semirare) {freq_type="semi-rare";}
+            // is boss
+            if(value.mp_boss) {freq_type="boss";}
             // all UR should be removed before now
             //if(frequency == -1) {freq_type = "ultra rare";}
             

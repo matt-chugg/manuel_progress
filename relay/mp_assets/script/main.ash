@@ -7,6 +7,8 @@ record monster_item {
 	string mp_zone_name;
 	int mp_factoids;
 	float mp_frequency;
+	boolean mp_semirare;
+	boolean mp_boss;
 };
 
  monster_item[int] get_monsters() {
@@ -43,6 +45,8 @@ record monster_item {
 			m.mp_factoids = monster_factoids_available(mob,true);
 			m.mp_frequency = freq;
 			monster_items[i] = m;
+			m.mp_semirare = index_of(mob.attributes.to_lower_case(),"semirare") > -1;
+			m.mp_boss = mob.boss;
 			i=i+1; 
 		}
 	}

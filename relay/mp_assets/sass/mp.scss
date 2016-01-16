@@ -4,7 +4,7 @@ $lgreen: #D0FED0; $lred: #FDC9C9; $lorange: #FCDDA2;
 
 
 body.mp_wait, body.mp_wait *{cursor: wait !important;}
-body{background-color:#eeeeee; height:auto; min-height:100%;}
+body{background-color:#cccccc; height:auto; min-height:100%;}
 .clear {clear:both; overflow: hidden; font-size:0; height:1px;}
 
 header {
@@ -89,9 +89,12 @@ header {
         }
         
         
-        .freq {font-size:10px; display:inline-block; margin:0px auto; color:white; background-color:gray; text-align:center; padding:2px 5px;}
+        .freq {font-size:10px; display:inline-block; margin:0px auto; text-transform:lowercase; color:white; background-color:#010D74; text-align:center; padding:2px 5px;}
         
-        &[data-frequency-type="boss/one-time"] {.freq{background-color:purple;}}
+        &[data-frequency-type="one-time?"] {.freq{background-color:purple;}}
+        &[data-frequency-type="one-time?"] {.freq{background-color:purple;}}
+        &[data-frequency-type="boss"] {.freq{background-color:#028FA1;}}
+        &[data-frequency-type="semi-rare"] {.freq{background-color:magenta;}}
         &[data-frequency-type="low"] {.freq{background-color:orange;}}
     }
     
