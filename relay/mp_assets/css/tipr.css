@@ -55,7 +55,7 @@ http://www.tipue.com/tipr
 }
 .tipr_point_top:before 
 {
-	border-top-color: #dcdcdc;
+	border-top-color: blue;
 	border-width: 9px;
 	left: 50%;
 	margin-left: -9px;
@@ -79,7 +79,7 @@ http://www.tipue.com/tipr
 }
 .tipr_point_bottom:before 
 {
-	border-bottom-color: #dcdcdc;
+	border-bottom-color: blue;
 	border-width: 9px;
 	left: 50%;
 	margin-left: -9px;

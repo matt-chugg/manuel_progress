@@ -35,6 +35,7 @@ record special_monster_item {
 		// get all monsters in location
 		float [monster] mobs = appearance_rates(l);
 	
+	
 
 
 		// skip location if there is nothing useful there
@@ -59,20 +60,23 @@ record special_monster_item {
 			m.mp_information = "";
 			
 			// check for special cases
-			if(freq ==0 && special_monsters contains mob.to_string()) {
-			
+			string mal = mob.to_string()+"@"+l.to_string();
+
+			if(freq == 0 && special_monsters contains mal) {
+				
+				
 				// override boss record
-				if(special_monsters[mob.to_string()].mp_type.to_lower_case() == "boss") {
+				if(special_monsters[mal].mp_type.to_lower_case() == "boss") {
 					m.mp_boss = true;
 				}
 				
 				// set special flag
-				if(special_monsters[mob.to_string()].mp_type.to_lower_case() == "special") {
+				if(special_monsters[mal].mp_type.to_lower_case() == "special") {
 					m.mp_special = true;
 				}
 				
 				// add any extra information
-				m.mp_information = special_monsters[mob.to_string()].mp_info;
+				m.mp_information = special_monsters[mal].mp_info;
 			
 			}
 			
