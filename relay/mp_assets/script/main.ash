@@ -87,7 +87,7 @@ void update_progress(buffer page_data) {
 			monster_item m;
 			
 			m.mp_monster_id = mob.id;
-			m.mp_monster_name = mob.manuel_name;
+			m.mp_monster_name = mob.to_string();
 			m.mp_location_name = l.to_string();
 			m.mp_zone_name = l.zone;
 			m.mp_factoids = monster_factoids_available(mob,true);
