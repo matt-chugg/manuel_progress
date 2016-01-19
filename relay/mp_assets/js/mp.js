@@ -116,6 +116,11 @@ function mp_update_monsters(updatepages) {
             if(data.status) {
                 if(data.status === "ok") {
                     if(data.data) {process_monster_list(data.data);} else {alert("No data returned")}
+                    if(data.progress) {
+                        jQuery("#mp_progress")
+                            .html(data.progress.casually + " : " + data.progress.thoroughly + " : " + data.progress.exhaustively )
+                            .attr("title","casually: " + data.progress.casually + " | thoroughly: " + data.progress.thoroughly + " | exhaustively: " + data.progress.exhaustively )
+                    }       
                 } else {
                     alert(data.status + " : " + data.data);
                 }

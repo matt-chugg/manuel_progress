@@ -19,6 +19,44 @@ record special_monster_item {
 	string mp_info;
 };
 
+// record to hold progress
+record progress {
+	int casually;
+	int thoroughly;
+	int exhaustively;
+};
+
+// global progress, updated whenever the page is hit
+
+progress mp_progress;
+
+
+
+void update_progress(buffer page_data) {
+	// filter\=([1-3])?\'\>([0-9]*)?\screatures
+	//matcher progress_matcher = create_matcher("filter\=([1-3])?\'\>([0-9]*)?\screatures",page_data);
+	matcher progress_matcher = create_matcher("filter\=([1-3])?\'\>([0-9]*)? creatures",page_data);
+	
+	while (find(progress_matcher)){
+		switch {
+			case group(progress_matcher,1) == "1":
+				mp_progress.casually = group(progress_matcher,2).to_int();
+				break;
+		
+			case group(progress_matcher,1) == "2":
+				mp_progress.thoroughly = group(progress_matcher,2).to_int();
+				break;
+				
+			case group(progress_matcher,1) == "3":
+				mp_progress.exhaustively = group(progress_matcher,2).to_int();
+				break;
+		
+		}
+
+	
+	}
+}
+
  monster_item[int] get_monsters() {
 	int i = 0; monster_item[int] monster_items;
 	
@@ -93,10 +131,10 @@ void handle_ajax(string[string] fields) {
 
 	// hit mm pages if requested
 	if(fields["request"] == "monsters" && fields["pages"] != "") {
-		print("Hitting the manuel");
+		print("Hitting manuel... (que?)");
 		foreach i, page in split_string(fields["pages"], ",") {
 			print(page);
-			visit_url( "questlog.php?which=6&vl=" + page.to_lower_case() );
+			update_progress(visit_url("questlog.php?which=6&vl=" + page.to_lower_case()));
 		}
 	}
 	
@@ -104,7 +142,7 @@ void handle_ajax(string[string] fields) {
     if(fields["request"] == "monsters") {
 		monster_item[int] monster_items = get_monsters();
 		// send record as json
-		writeln("{\"status\":\"ok\",\"data\":" + monster_items.to_json() + "}");
+		writeln("{\"status\":\"ok\",\"data\":" + monster_items.to_json() + ",\"progress\":" + mp_progress.to_json() + "}");
         return;    
 	}
 	
@@ -124,7 +162,7 @@ void render_page() {
 
     // css styles
     writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/mp.css\" />");
-writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/tipr.css\" />");
+	writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/tipr.css\" />");
     // javascript
     writeln("<script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js\"></script>");
 	writeln("<script src=\"mp_assets/js/tipr.min.js\"></script>");
@@ -134,7 +172,7 @@ writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/tipr.css\" />");
     finish_header();
 
     // header and content div
-    writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + "</h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><div class=\"clear\">&nbsp;</div></header>");
+    writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + " - <span id=\"mp_progress\">0 : 0 : 0</span></h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><div class=\"clear\">&nbsp;</div></header>");
 	string content_class="";
 	if (get_property("mskc_mp_hide_completed_areas") == true) {content_class += "hide_completed_areas ";}
 	
@@ -151,6 +189,8 @@ writeln("<link rel=\"stylesheet\" href=\"mp_assets/css/tipr.css\" />");
  * Check for ajax and handle otherwise output the whole page
  */
 void mm_main() {
+	
+	mp_progress.casually = 0; mp_progress.thoroughly = 0; mp_progress.exhaustively = 0;
     fields = form_fields();
     if(fields["ajax"] == "true") {
         handle_ajax(fields); return;
