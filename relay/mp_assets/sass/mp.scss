@@ -7,6 +7,25 @@ body.mp_wait, body.mp_wait *{cursor: wait !important;}
 body{background-color:#cccccc; height:auto; min-height:100%;}
 .clear {clear:both; overflow: hidden; font-size:0; height:1px;}
 
+
+#mp_settings {
+    padding:10px; display:none;
+    span {display:block; font-size:14px; line-height:23px; vertical-align:bottom;}
+    input[type=checkbox] {line-height:18px; display:inline-block; margin:5px; vertical-align:bottom;}
+    label {font-size:14px; line-height:23px; vertical-align:bottom; display:inline-block; cursor:pointer;}
+    
+    
+    .close_settings,.save_settings  {
+        cursor:pointer; display:inline-block; color:white;
+              font-size:12px; line-height:24px; text-align:center; border:1px solid white;
+               margin: 7px 7px 0px 0px; padding: 0px 5px; text-decoration: none; display: inline-block; margin-right:10px;
+               float:none !important;
+    }
+    
+}
+
+
+
 header {
     padding:1px; background-color:black; color:white; font-family: courier; position:fixed; width:100%; top:0; left:0;
     h1 {font-size:18px; float:left;  line-height:18px; margin:10px; font-weight:normal; max-width:75%;}
@@ -18,6 +37,13 @@ header {
               float:right; margin: 7px 7px 0px 0px; padding: 0px 5px;
     }
     #jumpout {display:none;}
+    
+    #mp_progress {font-size:14px; line-height: 18px;}
+    
+    &.show_settings {
+        #mp_settings {display:block;}
+        .mp_settings {display:none;}
+    }
 }
 
 
@@ -131,5 +157,6 @@ header {
 	color:#fff;
 	font-size:12px Arial;
 }
+
 
 

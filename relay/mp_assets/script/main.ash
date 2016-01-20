@@ -32,6 +32,7 @@ progress mp_progress;
 
 
 
+
 void update_progress(buffer page_data) {
 	// filter\=([1-3])?\'\>([0-9]*)?\screatures
 	//matcher progress_matcher = create_matcher("filter\=([1-3])?\'\>([0-9]*)?\screatures",page_data);
@@ -67,8 +68,21 @@ void update_progress(buffer page_data) {
 	foreach l in $locations[] {
 		// skip some locations completely
 		// skip removed areas unless specific property says not to
-		if(l.parent.to_lower_case() == "removed" && (get_property("mskc_mp_show_removed_areas") != true)) {continue;}
 		
+		
+		
+		// hide some inaccessible areas
+		if(get_property("mskc_mp_hide_unavailable_areas") == true) {
+			// paths
+			if(l.zone == "Mothership" && my_path() != "Bugbear Invasion") {continue;}
+			if(l.zone == "KOL High School" && my_path() != "KOLHS") {continue;}
+			
+			// other
+			if(l.zone == "Rift" && (my_level() != 4 || my_level() != 5 || my_ascensions() == 0)) { continue;}
+		 
+			// removed areas
+			if(l.parent.to_lower_case() == "removed" ) {continue;}
+		}
 	
 		// get all monsters in location
 		float [monster] mobs = appearance_rates(l);
@@ -146,11 +160,42 @@ void handle_ajax(string[string] fields) {
         return;    
 	}
 	
+	
+	if(fields["request"] == "settings") {
+		
+		set_property("mskc_mp_hide_completed_areas",fields["mskc_mp_hide_completed_areas"]);
+		set_property("mskc_mp_hide_nearly_completed_areas",fields["mskc_mp_hide_nearly_completed_areas"]);
+		set_property("mskc_mp_hide_unavailable_areas",fields["mskc_mp_hide_unavailable_areas"]);
+		
+		writeln("{\"status\":\"ok\",\"data\":\"nothing to say\"}");
+		return;
+	}
 
 	
 	writeln("{\"status\":\"error\",\"data\":\"Unknown Request\"}");
 }
 
+
+
+string render_settings() {
+	// mskc_mp_show_removed_areas 
+	// mskc_mp_hide_completed_areas
+	// mskc_mp_hide_nearly_completed_areas
+	//
+	//
+	
+	
+	
+	
+	string settings = "<div id=\"mp_settings\">";
+	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_completed_areas\" " + (get_property("mskc_mp_hide_completed_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_completed_areas\">Hide 100% complete areas (mskc_mp_hide_completed_areas).</label></span>";
+	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_nearly_completed_areas\" " + (get_property("mskc_mp_hide_nearly_completed_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_nearly_completed_areas\">Hide nearly complete areas (ignore semi-rare, boss, one-time etc) (mskc_mp_hide_nearly_completed_areas).</label></span>";
+	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_unavailable_areas\" " + (get_property("mskc_mp_hide_unavailable_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_unavailable_areas\">Hide areas you cannot access (experimental) (mskc_mp_hide_unavailable_areas).</label></span>";
+	settings += "<span><a href=\"\" class=\"save_settings\">Save</a><a  href=\"\" class=\"close_settings\">Cancel</a></span>";
+	settings += "</div>";
+
+	return settings;
+}
 
 /*
  * Output the basic html structure for the page, 
@@ -172,7 +217,7 @@ void render_page() {
     finish_header();
 
     // header and content div
-    writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + " - <span id=\"mp_progress\">0 : 0 : 0</span></h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><div class=\"clear\">&nbsp;</div></header>");
+    writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + " - <span id=\"mp_progress\">0 : 0 : 0</span></h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><a class=\"mp_settings\">settings</a><div class=\"clear\">&nbsp;</div>" + render_settings() + "</header>");
 	string content_class="";
 	if (get_property("mskc_mp_hide_completed_areas") == true) {content_class += "hide_completed_areas ";}
 	

@@ -83,9 +83,6 @@ function process_monster_list(data) {
         
         monster.attr("data-progress",value.mp_factoids);
         
-        
-        
-        
     });
     
     
@@ -193,11 +190,60 @@ function mp_do_binds() {
        jQuery(this).parent(".zone").toggleClass("mp_min");
     });
     
+    
+    jQuery(document).on("click",".mp_settings",function(e) {
+       e.preventDefault();
+       jQuery("header").toggleClass("show_settings");
+    });
 
     
+    jQuery(document).on("click",".close_settings",function(e) {
+       e.preventDefault();
+       jQuery("header").removeClass("show_settings");
+    });
 
 
+    jQuery(document).on("click",".save_settings",function(e) {
+       e.preventDefault();
+       
+       var qs="?ajax=true&request=settings";
+       
+       jQuery("#mp_settings").find("input[type=checkbox]").each(function(){
+          qs += "&" + jQuery(this).attr("id") + "=" + jQuery(this).is(":checked");
+       });
+       
+        jQuery.ajax({
+        dataType: "json",
+        url: "relay_Manuel_Progress.ash" + qs,
 
+        success: function(data) {
+            if(data.status) {
+                if(data.status === "ok") {
+                    // settings saved, reload
+                        
+                        if(typeof top.mainpane !== "undefined") {
+                            top.mainpane.location.href = top.mainpane.location.href;
+                        } else {
+                            location.reload();
+                        }
+    
+
+                } else {
+                    alert(data.status + " : " + data.data);
+                }
+            } else {
+                // unknown response
+                alert("unrecognised response, see console");
+                console.log(data);
+            }
+            jQuery("header").removeClass("show_settings");
+            
+        },
+        async: true
+    });
+       
+       
+    });
 
 
 }
