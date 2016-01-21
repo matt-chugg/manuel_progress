@@ -1,11 +1,15 @@
 /* global top */
 
+
+var progress;
+ 
 /* process the list of monsters from mafia */
 function process_monster_list(data) {
     jQuery.each(data,function(key,value) {
         var zone_name = String(value.mp_zone_name);
         var location_name = String(value.mp_location_name);
         var monster_name = String(value.mp_monster_name);
+
         
         if(zone_name === "") {zone_name = "unknown zone";}
         if(location_name === "") {location_name = "unknown location";}
@@ -82,7 +86,8 @@ function process_monster_list(data) {
         if(monster.length !== 1) {alert("monster error"); return false;}
         
         monster.attr("data-progress",value.mp_factoids);
-        
+        progress[value.mp_factoids]++;
+        progress[4]++;
     });
     
     
@@ -104,6 +109,7 @@ function process_monster_list(data) {
 
 function mp_update_monsters(updatepages) {
     jQuery("body").addClass("mp_wait");
+     progress = [0,0,0,0,0];
     updatepages = updatepages || '';
     jQuery.ajax({
         dataType: "json",
@@ -127,7 +133,7 @@ function mp_update_monsters(updatepages) {
                 console.log(data);
             }
             jQuery("body").removeClass("mp_wait");
-            
+            console.log("Progress: " + progress);
         },
         async: true
     });

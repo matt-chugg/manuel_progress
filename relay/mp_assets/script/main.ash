@@ -58,7 +58,45 @@ void update_progress(buffer page_data) {
 	}
 }
 
- monster_item[int] get_monsters() {
+monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
+	
+	
+	boolean [string][string][string][monster] extramonsters;
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
+		extramonsters["Holiday Wanderers"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
+	}
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "El Dia De Los Muertos Borrachos")) {
+		extramonsters["Holiday Wanderers"]["El Dia de Los Muertos Borrachos"]["Wandering: every 25-35 turns"] = $monsters[Novio Cad&aacute;ver, Padre Cad&aacute;ver, Novia Cad&aacute;ver, Persona Inocente Cad&aacute;ver];
+	}
+
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Talk Like a Pirate Day")) {
+		extramonsters["Holiday Wanderers"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
+	}
+	
+	
+	foreach z,l,i,mob in extramonsters {
+		monster_item m;
+			
+		m.mp_monster_id = mob.id; 
+		m.mp_monster_name = mob.to_string();
+		m.mp_zone_name = z;	m.mp_location_name = l;
+		m.mp_factoids = monster_factoids_available(mob,true);
+		m.mp_frequency = 0;
+		m.mp_semirare = false; m.mp_boss = false; m.mp_special = true;
+		m.mp_information = i;
+		monster_items[count(monster_items)] = m;
+	
+	}
+	
+	
+ 
+ 
+	return monster_items;
+
+ }
+
+monster_item[int] get_monsters() {
 	int i = 0; monster_item[int] monster_items;
 	
 	// load special monster data
@@ -139,7 +177,14 @@ void update_progress(buffer page_data) {
 			// store the monster after adding all records
 			monster_items[i] = m; i=i+1;
 		}
+	
 	}
+	
+	// add extras
+	
+	monster_items = add_extra_monsters(monster_items);
+	
+	
 	// return full list of monsters
 	return monster_items;
 }
