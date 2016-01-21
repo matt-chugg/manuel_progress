@@ -59,10 +59,9 @@ void update_progress(buffer page_data) {
 }
 
 monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
-	
-	
 	boolean [string][string][string][monster] extramonsters;
 	
+	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
 		extramonsters["Holiday Wanderers"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
 	}
@@ -73,6 +72,19 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Talk Like a Pirate Day")) {
 		extramonsters["Holiday Wanderers"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
+		
+	// brickos
+	extramonsters["BRICKO Monsters"]["BRICKO"][""] = $monsters[BRICKO Airship, BRICKO Bat, BRICKO Cathedral, BRICKO Elephant, BRICKO Gargantuchicken, BRICKO Octopus, BRICKO Ooze, BRICKO Oyster, BRICKO Python, BRICKO Turtle, BRICKO Vacuum Cleaner];
+	
+	// free combat from familiar
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
+		extramonsters["Familiar Combats"]["Mini-Hipster"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[angry bassist, blue-haired girl, evil ex-girlfriend, peeved roommate, random scenester];
+    }
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Artistic Goth Kid]))) {
+		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
+	}
+	
 	
 	
 	foreach z,l,i,mob in extramonsters {
