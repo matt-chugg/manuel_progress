@@ -85,9 +85,8 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	}
 	
 	// transmission from planet Xi
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Xi Receiver Unit]) == 0)) {
-		extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
-	}
+	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
+	
 	
 	// cleesh
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
