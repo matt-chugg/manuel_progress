@@ -66,8 +66,7 @@ void update_progress(buffer page_data) {
 
 	
 	foreach l in $locations[] {
-		// skip some locations completely
-		// skip removed areas unless specific property says not to
+
 		
 		
 		
@@ -114,8 +113,13 @@ void update_progress(buffer page_data) {
 			// check for special cases
 			string mal = mob.to_string()+"@"+l.to_string();
 
-			if(freq == 0 && special_monsters contains mal) {
+			if(special_monsters contains mal) {
 				
+				// removed or unfactoidable
+				if(special_monsters[mal].mp_type.to_lower_case() == "removed" || special_monsters[mal].mp_type.to_lower_case() == "nofactoid") {
+					continue;
+				}
+
 				
 				// override boss record
 				if(special_monsters[mal].mp_type.to_lower_case() == "boss") {

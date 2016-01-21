@@ -13,3 +13,6 @@ spider-legged witch's hut@The Road to the White Citadel	special	<strong>ONCE PER
 extremely annoyed witch@The Road to the White Citadel	special	<strong>ONCE PER ASCENSION</strong>after defeating 30 pairs of burnouts and 1 biclops<br />choice: Life Ain't Nothin But Witches and Mummies<br /><strong>Kick in the front door</string> > <strong>Screw it, kick down the door</strong> > <strong>So much for the direct approach.</strong>
 Elpízo & Crosybdis@The Road to the White Citadel	boss	?
 white elephant@Whitey's Grove	special	use 1 <strong>white page</strong> and choose <Strong>Fight a white elephant</strong>
+The Frattlesnake@Frat House	removed	no longer available, may come back?
+X-32-F Combat Training Snowman@The X-32-F Combat Training Snowman	nofactoid	doesn't appear to have any factoids
+All-Hallow's Steve@Trick-or-Treating	nofactoid	doesn't appear to have any factoids
