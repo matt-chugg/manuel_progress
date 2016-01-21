@@ -59,7 +59,7 @@ void update_progress(buffer page_data) {
 }
 
 monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
-	boolean [string][string][string][monster] extramonsters;
+	boolean [string][string][string][monster] extramonsters; int index = count(monster_items);
 	
 	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
@@ -80,12 +80,19 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
 		extramonsters["Familiar Combats"]["Mini-Hipster"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[angry bassist, blue-haired girl, evil ex-girlfriend, peeved roommate, random scenester];
     }
-	
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Artistic Goth Kid]))) {
 		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
 	}
 	
+	// transmission from planet Xi
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Xi Receiver Unit]) == 0)) {
+		extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
+	}
 	
+	// cleesh
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
+		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
+	}
 	
 	foreach z,l,i,mob in extramonsters {
 		monster_item m;
@@ -97,8 +104,8 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		m.mp_frequency = 0;
 		m.mp_semirare = false; m.mp_boss = false; m.mp_special = true;
 		m.mp_information = i;
-		monster_items[count(monster_items)] = m;
-	
+		monster_items[index] = m;
+		index+=1;
 	}
 	
 	
