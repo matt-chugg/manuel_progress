@@ -131,7 +131,7 @@ monster_item[int] get_monsters() {
 			// paths
 			if(l.zone == "Mothership" && my_path() != "Bugbear Invasion") {continue;}
 			if(l.zone == "KOL High School" && my_path() != "KOLHS") {continue;}
-			
+			if(l == $location[The Secret Council Warehouse] && my_path() != "Actually Ed the Undying") {continue;}
 			// other
 			if(l.zone == "Rift" && (my_level() != 4 || my_level() != 5 || my_ascensions() == 0)) {continue;}
 			
@@ -156,7 +156,8 @@ monster_item[int] get_monsters() {
 				}
 			}
 			
-			if(l == $location[The Secret Council Warehouse] && my_path() != "Actually Ed the Undying") {continue;}
+			
+			
 			
 			// removed areas
 			if(l.parent.to_lower_case() == "removed" ) {continue;}
