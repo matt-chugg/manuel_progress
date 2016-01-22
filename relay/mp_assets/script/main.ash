@@ -133,8 +133,29 @@ monster_item[int] get_monsters() {
 			if(l.zone == "KOL High School" && my_path() != "KOLHS") {continue;}
 			
 			// other
-			if(l.zone == "Rift" && (my_level() != 4 || my_level() != 5 || my_ascensions() == 0)) { continue;}
-		 
+			if(l.zone == "Rift" && (my_level() != 4 || my_level() != 5 || my_ascensions() == 0)) {continue;}
+			
+			// finished events
+			if($locations[Shivering Timbers, A Skeleton Invasion!,The Cannon Museum,Grim Grimacite Site,A Pile of Old Servers,The Haunted Sorority House,A Stinking Abyssal Portal,A Scorching Abyssal Portal,A Freezing Abyssal Portal,An Unsettling Abyssal Portal,A Terrifying Abyssal Portal,A Yawning Abyssal Portal,The Space Odyssey Discotheque,The Spirit World,Some Scattered Smoking Debris,A Crater Full of Space Beasts] contains l) {continue;}
+			
+			// twitch
+			if(l.zone == "Twitch" && get_property( "timeTowerAvailable" ) != "true") {continue;}
+			
+			// little canadia 
+			if(l.zone == "Little Canadia" && !canadia_available()) {continue;}
+			
+			// MusSign
+			if(l.zone == "MusSign" && !knoll_available()) {continue;}
+			//mox
+			if(l.zone == "MoxSign" && !(gnomads_available() && get_property("lastDesertUnlock") == my_ascensions())) {continue;}
+
+			// knoll
+			if($locations[The Degrassi Knoll Restroom,The Degrassi Knoll Bakery,The Degrassi Knoll Gym,The Degrassi Knoll Garage] contains l) {
+				if(!(my_sign() != "Mongoose" && my_sign() != "Wallaby" && my_sign() != "Vole")) {
+					continue;
+				}
+			}
+			
 			// removed areas
 			if(l.parent.to_lower_case() == "removed" ) {continue;}
 		}
@@ -186,6 +207,8 @@ monster_item[int] get_monsters() {
 				if(special_monsters[mal].mp_type.to_lower_case() == "special") {
 					m.mp_special = true;
 				}
+				
+				
 				
 				// add any extra information
 				m.mp_information = special_monsters[mal].mp_info;
