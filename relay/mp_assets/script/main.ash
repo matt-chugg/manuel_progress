@@ -156,6 +156,8 @@ monster_item[int] get_monsters() {
 				}
 			}
 			
+			if(l == $location[The Secret Council Warehouse] && my_path() != "Actually Ed the Undying") {continue;}
+			
 			// removed areas
 			if(l.parent.to_lower_case() == "removed" ) {continue;}
 		}
