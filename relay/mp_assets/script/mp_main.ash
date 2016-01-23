@@ -123,9 +123,6 @@ monster_item[int] get_monsters() {
 	
 	foreach l in $locations[] {
 
-		
-		
-		
 		// hide some inaccessible areas
 		if(get_property("mskc_mp_hide_unavailable_areas") == true) {
 			// paths
@@ -142,7 +139,7 @@ monster_item[int] get_monsters() {
 			if(l.zone == "Twitch" && get_property( "timeTowerAvailable" ) != "true") {continue;}
 			
 			// little canadia 
-			if(l.zone == "Little Canadia" && !canadia_available()) {continue;}
+			if((l.zone == "Little Canadia" || l.parent == "Little Canadia") && !canadia_available()) {continue;}
 			
 			// MusSign
 			if(l.zone == "MusSign" && !knoll_available()) {continue;}
