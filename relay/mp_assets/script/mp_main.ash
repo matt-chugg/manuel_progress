@@ -59,21 +59,35 @@ void update_progress(buffer page_data) {
 
 monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	boolean [string][string][string][monster] extramonsters; int index = count(monster_items);
+
+	// brickos pretty much unconditional
+	extramonsters["BRICKO Monsters"]["BRICKO"][""] = $monsters[BRICKO Airship, BRICKO Bat, BRICKO Cathedral, BRICKO Elephant, BRICKO Gargantuchicken, BRICKO Octopus, BRICKO Ooze, BRICKO Oyster, BRICKO Python, BRICKO Turtle, BRICKO Vacuum Cleaner];
+	
+	
+	// transmission from planet Xi
+	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
+	
+	
 	
 	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
-		extramonsters["Holiday Wanderers"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
+		extramonsters["Wanderering Monsters"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
 	}
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "El Dia De Los Muertos Borrachos")) {
-		extramonsters["Holiday Wanderers"]["El Dia de Los Muertos Borrachos"]["Wandering: every 25-35 turns"] = $monsters[Novio Cad&aacute;ver, Padre Cad&aacute;ver, Novia Cad&aacute;ver, Persona Inocente Cad&aacute;ver];
+		extramonsters["Wanderering Monsters"]["El Dia de Los Muertos Borrachos"]["Wandering: every 25-35 turns"] = $monsters[Novio Cad&aacute;ver, Padre Cad&aacute;ver, Novia Cad&aacute;ver, Persona Inocente Cad&aacute;ver];
 	}
-
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Talk Like a Pirate Day")) {
-		extramonsters["Holiday Wanderers"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
+		extramonsters["Wanderering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
-		
-	// brickos
-	extramonsters["BRICKO Monsters"]["BRICKO"][""] = $monsters[BRICKO Airship, BRICKO Bat, BRICKO Cathedral, BRICKO Elephant, BRICKO Gargantuchicken, BRICKO Octopus, BRICKO Ooze, BRICKO Oyster, BRICKO Python, BRICKO Turtle, BRICKO Vacuum Cleaner];
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bees Hate You")) {
+		extramonsters["Wanderering Monsters"]["path: Bees Hate You"]["Wandering: every 15-20 turns."] = $monsters[beebee gunners,moneybee,mumblebee,beebee queue,bee swarm,buzzerker,Beebee King,bee thoven,Queen Bee];
+	}
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Heavy Rains")) {
+		extramonsters["Wanderering Monsters"]["path: Heavy Rains"]["Wandering: every 15-20 turns."] = $monsters[giant isopod, gourmet gourami, freshwater bonefish, alley catfish, piranhadon, giant tardigrade, aquaconda, storm cow];
+	}
+	
+	
+	//
 	
 	// free combat from familiar
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
@@ -83,14 +97,15 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
 	}
 	
-	// transmission from planet Xi
-	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
+	
 	
 	
 	// cleesh
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
 		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
 	}
+	
+	
 	
 	// deck of every card
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
@@ -109,8 +124,53 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 			extramonsters["Beanstalk"]["The Hole in the Sky (even ascension)"]["Only available in even ascensions"]  = $monsters[Burrowing Bishop,Family Jewels,Hooded Warrior,Junk,One-Eyed Willie,Pork Sword,Skinflute,Trouser Snake,Twig and Berries];
 		}
 	}
-
 	
+	
+	
+	// show path specific monsters when not in that path
+	// boss bat
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Actually Ed the Undying")) {		
+		// boss bat boss replacment
+		extramonsters["BatHole"]["The Boss Bat's Lair"]["Replaces boss bat in Actually Ed the Undying"] = $monsters[Boss Bat?];
+		extramonsters["Knob"]["Throne Room"]["Replaces knob goblin king in Actually Ed the Undying"] = $monsters[New Knob Goblin King];
+		extramonsters["Cyrpt"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Actually Ed the Undying"] = $monsters[Donerbagon];
+		extramonsters["McLarge"]["Mist-Shrouded Peak"]["Replaces Groar in Actually Ed the Undying"] = $monsters[Your winged yeti];
+		extramonsters["Sorceress"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Actually Ed the Undying"] = $monsters[You the Adventurer];
+		
+		
+
+	}
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Heavy Rains")) {		
+		// boss bat boss replacment
+		extramonsters["BatHole"]["The Boss Bat's Lair"]["Replaces boss bat in Heavy Rains"] = $monsters[Aquabat];
+		extramonsters["Knob"]["Throne Room"]["Replaces knob goblin king in Heavy Rains"] = $monsters[Aquagoblin];
+		extramonsters["Cyrpt"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Heavy Rains"] = $monsters[Auqadargon];
+		extramonsters["McLarge"]["Mist-Shrouded Peak"]["Replaces Groar in Heavy Rains"] = $monsters[Gurgle];
+		extramonsters["HiddenCity"]["A Massive Ziggurat"]["Replaces Protector Spectre in Heavy Rains"] = $monsters[Protector Spurt];
+		extramonsters["Plains"]["Inside the Palindome"]["Replaces Dr. Awkward in Heavy Rains"] = $monsters[Dr. Aquard];
+		extramonsters["IsleWar"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Heavy Rains"] =$monsters[The Aquaman];
+		extramonsters["IsleWar"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Heavy Rains"] =   $monsters[Big Wisnaqua];
+		extramonsters["Sorceress"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Heavy Rains"] = $monsters[The Rain King];
+		
+		
+		
+
+	}
+	
+	// show things that have been replaced by being in a path
+	// boss bat
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() == "Actually Ed the Undying")) {		
+		//extramonsters["BatHole"]["The Boss Bat's Lair"]["Not available because you are in a special path"] = $monsters[Boss Bat];
+		
+		
+	}
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() == "Actually Ed the Undying")) {		
+		//extramonsters["BatHole"]["The Boss Bat's Lair"]["Not available because you are in a special path"] = $monsters[Boss bat];
+
+		
+	}
+	
+
 	
 	
 	foreach z,l,i,mob in extramonsters {
@@ -287,8 +347,7 @@ string render_settings() {
 	// mskc_mp_show_removed_areas 
 	// mskc_mp_hide_completed_areas
 	// mskc_mp_hide_nearly_completed_areas
-	//
-	//
+
 	
 	
 	
@@ -296,7 +355,7 @@ string render_settings() {
 	string settings = "<div id=\"mp_settings\">";
 	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_completed_areas\" " + (get_property("mskc_mp_hide_completed_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_completed_areas\">Hide 100% complete areas (mskc_mp_hide_completed_areas).</label></span>";
 	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_nearly_completed_areas\" " + (get_property("mskc_mp_hide_nearly_completed_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_nearly_completed_areas\">Hide nearly complete areas (ignore semi-rare, boss, one-time etc) (mskc_mp_hide_nearly_completed_areas).</label></span>";
-	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_unavailable_areas\" " + (get_property("mskc_mp_hide_unavailable_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_unavailable_areas\">Hide areas you cannot access (experimental) (mskc_mp_hide_unavailable_areas).</label></span>";
+	settings += "<span><input type=\"checkbox\"  id=\"mskc_mp_hide_unavailable_areas\" " + (get_property("mskc_mp_hide_unavailable_areas") == true ? "checked" : "") + "/><label for=\"mskc_mp_hide_unavailable_areas\">Hide areas and mobs you cannot access (experimental) (mskc_mp_hide_unavailable_areas).</label></span>";
 	settings += "<span><a href=\"\" class=\"save_settings\">Save</a><a  href=\"\" class=\"close_settings\">Cancel</a></span>";
 	settings += "</div>";
 
