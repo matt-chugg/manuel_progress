@@ -93,6 +93,16 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
 	}
 	
+	// deck of every card
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
+		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"IV - The Emperor\""] = $monsters[The Emperor];
+		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"Green Card\""] = $monsters[legal alien];
+		
+		//extramonsters["Deck of Every Card "]["Deck of Every Card"]["Deck of every card<br />Cannot be killed!<br />drops factoid "] = $monsters[The Hermit];
+	}
+	
+	
+	
 	foreach z,l,i,mob in extramonsters {
 		monster_item m;
 			
@@ -152,9 +162,6 @@ monster_item[int] get_monsters() {
 					continue;
 				}
 			}
-			
-			
-			
 			
 			// removed areas
 			if(l.parent.to_lower_case() == "removed" ) {continue;}
