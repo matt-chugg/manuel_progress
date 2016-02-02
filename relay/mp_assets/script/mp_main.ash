@@ -27,7 +27,6 @@ record progress {
 };
 
 // global progress, updated whenever the page is hit
-
 progress mp_progress;
 
 
@@ -97,9 +96,20 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
 		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"IV - The Emperor\""] = $monsters[The Emperor];
 		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"Green Card\""] = $monsters[legal alien];
-		
-		//extramonsters["Deck of Every Card "]["Deck of Every Card"]["Deck of every card<br />Cannot be killed!<br />drops factoid "] = $monsters[The Hermit];
 	}
+	
+	
+	// odd and even ascensions // show ALL hole in the sky monsters unless mskc_mp_hide_unavailable_areas == true
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {		
+		if((my_ascensions() % 2) == 0) {
+			// odd ascensions
+			extramonsters["Beanstalk"]["The Hole in the Sky (odd ascension)"]["Only available in odd ascensions"] = $monsters[Axe Wound,Beaver,Box,Bush,Camel's Toe,Flange,Honey Pot,Little Man in the Canoe,Muff];
+		} else {
+			// even ascensions+
+			extramonsters["Beanstalk"]["The Hole in the Sky (even ascension)"]["Only available in even ascensions"]  = $monsters[Burrowing Bishop,Family Jewels,Hooded Warrior,Junk,One-Eyed Willie,Pork Sword,Skinflute,Trouser Snake,Twig and Berries];
+		}
+	}
+
 	
 	
 	
@@ -117,8 +127,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		index+=1;
 	}
 	
-	
- 
+
  
 	return monster_items;
 
