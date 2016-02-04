@@ -57,6 +57,39 @@ void update_progress(buffer page_data) {
 	}
 }
 
+monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
+	boolean[monster] seen_monsters;
+	foreach i,mob in monster_items {
+		monster sm = to_monster(mob.mp_monster_name);
+		
+		if(index_of(sm.attributes.to_lower_case(),"ultrarare") > -1) {
+			continue;
+		}
+		
+		
+		seen_monsters[sm] = true;
+	}
+	
+
+	int index = count(monster_items);
+	foreach mob in $monsters[] {
+		if(!(seen_monsters contains mob)) {
+			monster_item m;
+			m.mp_monster_id = mob.id; 
+			m.mp_monster_name = mob.to_string();
+			m.mp_zone_name = "Unknown";	m.mp_location_name = "Other";
+			m.mp_factoids = monster_factoids_available(mob,true);
+			m.mp_frequency = 0;
+			m.mp_semirare = false; m.mp_boss = false; m.mp_special = true;
+			m.mp_information = "?";
+			monster_items[index] = m;
+			index+=1;
+		}
+	}
+	
+	return monster_items;
+}
+
 monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	boolean [string][string][string][monster] extramonsters; int index = count(monster_items);
 
@@ -322,8 +355,12 @@ monster_item[int] get_monsters() {
 	}
 	
 	// add extras
-	
 	monster_items = add_extra_monsters(monster_items);
+	
+	// add any monsters that are not already in the list.
+	if(get_property("mskc_mp_show_unseen_monsters") == true) {
+		monster_items = add_unseen_monsters(monster_items);
+	}
 	
 	
 	// return full list of monsters
@@ -356,6 +393,7 @@ void handle_ajax(string[string] fields) {
 		set_property("mskc_mp_hide_completed_areas",fields["mskc_mp_hide_completed_areas"]);
 		set_property("mskc_mp_hide_nearly_completed_areas",fields["mskc_mp_hide_nearly_completed_areas"]);
 		set_property("mskc_mp_hide_unavailable_areas",fields["mskc_mp_hide_unavailable_areas"]);
+		
 		
 		writeln("{\"status\":\"ok\",\"data\":\"nothing to say\"}");
 		return;

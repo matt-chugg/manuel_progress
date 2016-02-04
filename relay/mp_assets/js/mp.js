@@ -17,7 +17,7 @@ function process_monster_list(data) {
         
         // add / find the zone
         if(jQuery("#content>.zone[data-zonename=\"" + zone_name + "\"]").length === 0) {
-            var zone = jQuery("<div><h2>" + zone_name + "<a class=\"mp_refresh\">refresh</a></h2></div>")
+            var zone = jQuery("<div><h2>" + zone_name + "<span>&nbsp;</span><a class=\"mp_refresh\">refresh</a></h2></div>")
                 .addClass("zone")
                 .attr("data-zonename",zone_name);
             jQuery("#content").append(zone);
@@ -28,7 +28,7 @@ function process_monster_list(data) {
         
         // add/find location
         if(zone.children(".location[data-locationname=\"" + location_name + "\"]").length ===0) {
-            var location = jQuery("<div><h2>" + location_name + "<a class=\"mp_refresh\" >refresh</a></h2></div>")
+            var location = jQuery("<div><h2>" + location_name + "<span>&nbsp;</span><a class=\"mp_refresh\" >refresh</a></h2></div>")
                 .addClass("location")
                 .attr("data-locationname",location_name);
             zone.append(location);
@@ -101,6 +101,19 @@ function process_monster_list(data) {
             jQuery(this).attr("data-area-nearly-completed","true");
         }
         
+        $total = jQuery(this).find(".monster").length;
+        $prog0 = jQuery(this).find(".monster[data-progress=0]").length;
+        $prog1 = jQuery(this).find(".monster[data-progress=1]").length;
+        $prog2 = jQuery(this).find(".monster[data-progress=2]").length;
+        $prog3 = jQuery(this).find(".monster[data-progress=3]").length;
+        
+        $tString =  "<span style=\"color:red\">" + $prog0 + "</span>" + " : ";
+        $tString += "<span style=\"color:orange\">" + $prog1 + "</span>" + " : ";
+        $tString += "<span style=\"color:orange\">" + $prog2 + "</span>" + " : ";
+        $tString += "<span style=\"color:#00FF00\">" + $prog3 + "</span> = ";
+        $tString += ((($prog1*1)+($prog2*2)+($prog3*3))/($total*3)*100).toFixed(2) + "%";
+        
+        jQuery(this).children("h2").children("span").html("&nbsp;" + $tString);
     });
     
     jQuery(".tip").tipr();
