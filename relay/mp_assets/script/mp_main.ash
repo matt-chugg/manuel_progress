@@ -79,15 +79,8 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Talk Like a Pirate Day")) {
 		extramonsters["Wanderering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bees Hate You")) {
-		extramonsters["Wanderering Monsters"]["path: Bees Hate You"]["Wandering: every 15-20 turns."] = $monsters[beebee gunners,moneybee,mumblebee,beebee queue,bee swarm,buzzerker,Beebee King,bee thoven,Queen Bee];
-	}
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Heavy Rains")) {
-		extramonsters["Wanderering Monsters"]["path: Heavy Rains"]["Wandering: every 15-20 turns."] = $monsters[giant isopod, gourmet gourami, freshwater bonefish, alley catfish, piranhadon, giant tardigrade, aquaconda, storm cow];
-	}
 	
-	
-	//
+
 	
 	// free combat from familiar
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
@@ -125,52 +118,83 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		}
 	}
 	
+	// bees hate you
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bees Hate You")) {
+		// wanderers
+		extramonsters["path: Bees Hate You"]["Wanderering Monsters"]["Wandering: every 15-20 turns."] = $monsters[beebee gunners,moneybee,mumblebee,beebee queue,bee swarm,buzzerker,Beebee King,bee thoven,Queen Bee];
+	}
 	
+	// heavy rains
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Heavy Rains")) {
+		// wanderers
+		extramonsters["path: Heavy Rains"]["Wanderering Monsters"]["Wandering: every 15-20 turns."] = $monsters[giant isopod, gourmet gourami, freshwater bonefish, alley catfish, piranhadon, giant tardigrade, aquaconda, storm cow];
+		
+		// boss replacements
+		extramonsters["path: Heavy Rains"]["The Boss Bat's Lair"]["Replaces boss bat in Heavy Rains"] = $monsters[Aquabat];
+		extramonsters["path: Heavy Rains"]["Throne Room"]["Replaces knob goblin king in Heavy Rains"] = $monsters[Aquagoblin];
+		extramonsters["path: Heavy Rains"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Heavy Rains"] = $monsters[Auqadargon];
+		extramonsters["path: Heavy Rains"]["Mist-Shrouded Peak"]["Replaces Groar in Heavy Rains"] = $monsters[Gurgle];
+		extramonsters["path: Heavy Rains"]["A Massive Ziggurat"]["Replaces Protector Spectre in Heavy Rains"] = $monsters[Protector Spurt];
+		extramonsters["path: Heavy Rains"]["Inside the Palindome"]["Replaces Dr. Awkward in Heavy Rains"] = $monsters[Dr. Aquard];
+		extramonsters["path: Heavy Rains"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Heavy Rains"] =$monsters[The Aquaman];
+		extramonsters["path: Heavy Rains"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Heavy Rains"] =   $monsters[Big Wisnaqua];
+		extramonsters["path: Heavy Rains"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Heavy Rains"] = $monsters[The Rain King];
+	}
 	
-	// show path specific monsters when not in that path
-	// boss bat
+	// ed the undying
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Actually Ed the Undying")) {		
-		// boss bat boss replacment
-		extramonsters["BatHole"]["The Boss Bat's Lair"]["Replaces boss bat in Actually Ed the Undying"] = $monsters[Boss Bat?];
-		extramonsters["Knob"]["Throne Room"]["Replaces knob goblin king in Actually Ed the Undying"] = $monsters[New Knob Goblin King];
-		extramonsters["Cyrpt"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Actually Ed the Undying"] = $monsters[Donerbagon];
-		extramonsters["McLarge"]["Mist-Shrouded Peak"]["Replaces Groar in Actually Ed the Undying"] = $monsters[Your winged yeti];
-		extramonsters["Sorceress"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Actually Ed the Undying"] = $monsters[You the Adventurer];
-		
-		
-
-	}
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Heavy Rains")) {		
-		// boss bat boss replacment
-		extramonsters["BatHole"]["The Boss Bat's Lair"]["Replaces boss bat in Heavy Rains"] = $monsters[Aquabat];
-		extramonsters["Knob"]["Throne Room"]["Replaces knob goblin king in Heavy Rains"] = $monsters[Aquagoblin];
-		extramonsters["Cyrpt"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Heavy Rains"] = $monsters[Auqadargon];
-		extramonsters["McLarge"]["Mist-Shrouded Peak"]["Replaces Groar in Heavy Rains"] = $monsters[Gurgle];
-		extramonsters["HiddenCity"]["A Massive Ziggurat"]["Replaces Protector Spectre in Heavy Rains"] = $monsters[Protector Spurt];
-		extramonsters["Plains"]["Inside the Palindome"]["Replaces Dr. Awkward in Heavy Rains"] = $monsters[Dr. Aquard];
-		extramonsters["IsleWar"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Heavy Rains"] =$monsters[The Aquaman];
-		extramonsters["IsleWar"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Heavy Rains"] =   $monsters[Big Wisnaqua];
-		extramonsters["Sorceress"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Heavy Rains"] = $monsters[The Rain King];
-		
-		
-		
-
+		// boss replacement
+		extramonsters["path: Actually Ed the Undying"]["The Boss Bat's Lair"]["Replaces boss bat in Actually Ed the Undying"] = $monsters[Boss Bat?];
+		extramonsters["path: Actually Ed the Undying"]["Throne Room"]["Replaces knob goblin king in Actually Ed the Undying"] = $monsters[New Knob Goblin King];
+		extramonsters["path: Actually Ed the Undying"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Actually Ed the Undying"] = $monsters[Donerbagon];
+		extramonsters["path: Actually Ed the Undying"]["Mist-Shrouded Peak"]["Replaces Groar in Actually Ed the Undying"] = $monsters[Your winged yeti];
+		extramonsters["path: Actually Ed the Undying"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Actually Ed the Undying"] = $monsters[You the Adventurer];
 	}
 	
-	// show things that have been replaced by being in a path
-	// boss bat
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() == "Actually Ed the Undying")) {		
-		//extramonsters["BatHole"]["The Boss Bat's Lair"]["Not available because you are in a special path"] = $monsters[Boss Bat];
-		
-		
-	}
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() == "Actually Ed the Undying")) {		
-		//extramonsters["BatHole"]["The Boss Bat's Lair"]["Not available because you are in a special path"] = $monsters[Boss bat];
-
-		
+	
+	// zombie slayer
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Zombie Slayer")) {
+		extramonsters["path: Zombie Slayer"]["Wanderering Monsters"]["Wandering: every ? turns based on level ?"] = $monsters[Norville Rogers,Peacannon,Scott the Miner,Father McGruber,Herman East\, Relivinator,Angry Space Marine,Deputy Nick Soames & Earl,Father Nikolai Ravonovich,Charity the Zombie Hunter,Special Agent Wallace Burke Corrigan,Hank North\, Photojournalist,rag-tag band of survivors,The Free Man,Wesley J. "Wes" Campbell,zombie-huntin' feller];
+		extramonsters["path: Zombie Slayer"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Zombie Slayer"] = $monsters[Rene C. Corman];
 	}
 	
 
+	//Way of the Stunning Fist
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Way of the Stunning Fist")) {
+		extramonsters["path: Way of the Stunning Fist"]["The Black Market"]["Beat up the shopkeeper"] = $monsters[Wu Tang the Betrayer];
+	}
+
+	//Avatar of Boris
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of Boris")) {
+		extramonsters["path: Avatar of Boris"]["Itznotyerzitz Mine"][""] = $monsters[Mountain man];
+		extramonsters["path: Avatar of Boris"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Avatar of Boris"] = $monsters[The Avatar of Sneaky Pete];
+		extramonsters["path: Avatar of Boris"]["The Luter's Grave"]["Plains, quest: Your Minstrel Stamps"] = $monsters[The Luter];
+	}
+	
+	//Avatar of Jarlsberg
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of Jarlsberg")) {
+		extramonsters["path: Avatar of Jarlsberg"]["The Naughty Sorceress' Chamber"]["?"] = $monsters[clancy,The Avatar of Boris];
+	}
+	
+	//Avatar of Sneaky Pete
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of Sneaky Pete")) {
+		extramonsters["path: Avatar of Sneaky Pete"]["The Naughty Sorceress' Chamber"]["?"] = $monsters[The Avatar of Jarlsberg];
+	}
+	
+	//Bugbear Invasion
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bugbear Invasion")) {
+		extramonsters["path: Bugbear Invasion"]["The Sleazy Back Alley"][""] = $monsters[scavenger bugbear];
+		extramonsters["path: Bugbear Invasion"]["The Spooky Forest"][""] = $monsters[hypodermic bugbear];
+		extramonsters["path: Bugbear Invasion"]["The Bat Hole (All zones except the Lair)"][""] = $monsters[batbugbear];
+		extramonsters["path: Bugbear Invasion"]["Laboratory"][""] = $monsters[bugbear scientist];
+		extramonsters["path: Bugbear Invasion"]["The Defiled Nook or The Misspelled Cemetary"][""] = $monsters[bugaboo];
+		extramonsters["path: Bugbear Invasion"]["Lair of the Ninja Snowmen"][""] = $monsters[Black Ops Bugbear];
+		extramonsters["path: Bugbear Invasion"]["The Penultimate Fantasy Airship"][""] = $monsters[Battlesuit Bugbear Type];
+		extramonsters["path: Bugbear Invasion"]["The Haunted Gallery"][""] = $monsters[ancient unspeakable bugbear];
+		extramonsters["path: Bugbear Invasion"]["The Battlefield (Frat Warrior Fatigues) or Bombed Hippy Camp or Bombed Frat House"][""] = $monsters[trendy bugbear chef];
+		
+		
+	}
 	
 	
 	foreach z,l,i,mob in extramonsters {
