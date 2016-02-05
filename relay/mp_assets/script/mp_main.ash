@@ -61,23 +61,45 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 	boolean[monster] seen_monsters;
 	foreach i,mob in monster_items {
 		monster sm = to_monster(mob.mp_monster_name);
-		
-		if(index_of(sm.attributes.to_lower_case(),"ultrarare") > -1) {
-			continue;
-		}
-		
-		
 		seen_monsters[sm] = true;
 	}
 	
 
 	int index = count(monster_items);
 	foreach mob in $monsters[] {
+		string l = "other";
+		
+		
+		// still ignore ultrarare
+		if(index_of(mob.attributes.to_lower_case(),"ultrarare") > -1) {
+			l = "No Factoid - UR";
+		}
+		
+		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman] contains mob) {
+			l = "No Factoid - ?";
+		}
+		
+		// old content
+		//tower
+		if($monsters[Beer Batter,best-selling novelist,Big Meat Golem,Bowling Cricket,Bronze Chef,collapsed mineshaft golem,concert pianist,darkness,El Diablo,Electron Submarine,endangered inflatable white tiger,Enraged Cow,fancy bath slug,Fickle Finger of F8,Flaming Samurai,giant bee,Giant Desktop Globe,giant fried egg,Ice Cube,malevolent crop circle,possessed pipe-organ,Pretty Fly,Tyrannosaurus Tex,Vicious Easel] contains mob) {
+			l = "No Factoid - old content";
+		}
+		// road to white citadel
+		if($monsters[angry raccoon puppet,eXtreme Sports Orcs] contains mob) {
+			l = "No Factoid - old content";
+		}
+		
+		// nightstands
+		if($monsters[animated nightstand (mahogany combat),animated nightstand (mahogany noncombat),animated nightstand (white combat),animated nightstand (white noncombat)] contains mob) {
+			l = "No Factoid - old content";
+		}
+		
+		
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
 			m.mp_monster_id = mob.id; 
 			m.mp_monster_name = mob.to_string();
-			m.mp_zone_name = "Unknown";	m.mp_location_name = "Other";
+			m.mp_zone_name = "Unknown";	m.mp_location_name = l;
 			m.mp_factoids = monster_factoids_available(mob,true);
 			m.mp_frequency = 0;
 			m.mp_semirare = false; m.mp_boss = false; m.mp_special = true;
@@ -96,25 +118,31 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	// brickos pretty much unconditional
 	extramonsters["BRICKO Monsters"]["BRICKO"][""] = $monsters[BRICKO Airship, BRICKO Bat, BRICKO Cathedral, BRICKO Elephant, BRICKO Gargantuchicken, BRICKO Octopus, BRICKO Ooze, BRICKO Oyster, BRICKO Python, BRICKO Turtle, BRICKO Vacuum Cleaner];
 	
+	// black pudding
+	extramonsters["MISC"]["Eating"]["Occurs randomly when eating black puddings"] = $monsters[black pudding];
+	
+	// butts
+	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt,somebody else's butt];
 	
 	// transmission from planet Xi
 	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
 	
+	// nemesis wandering monsters
+	extramonsters["Wandering Monsters"]["Nemesis assassins"]["thugs sent after you by your Nemesis."] = $monsters[menacing thug,Mob Penguin hitman,hunting seal,Argarggagarg the Dire Hellseal,turtle trapper,Safari Jack\, Small-Game Hunter,evil spaghetti cult assassin,Yakisoba the Executioner,b&eacute;arnaise zombie,Heimandatz\, Nacho Golem,flock of seagulls,Jocko Homo,mariachi bandolero,The Mariachi With No Name];
 	
 	
 	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
-		extramonsters["Wanderering Monsters"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
+		extramonsters["Wandering Monsters"]["Feast of Boris"]["Wandering: every 25-35 turns"] = $monsters[Candied Yam Golem, Malevolent Tofurkey, Possessed Can of Cranberry Sauce, Stuffing Golem];
 	}
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "El Dia De Los Muertos Borrachos")) {
-		extramonsters["Wanderering Monsters"]["El Dia de Los Muertos Borrachos"]["Wandering: every 25-35 turns"] = $monsters[Novio Cad&aacute;ver, Padre Cad&aacute;ver, Novia Cad&aacute;ver, Persona Inocente Cad&aacute;ver];
+		extramonsters["Wandering Monsters"]["El Dia de Los Muertos Borrachos"]["Wandering: every 25-35 turns"] = $monsters[Novio Cad&aacute;ver, Padre Cad&aacute;ver, Novia Cad&aacute;ver, Persona Inocente Cad&aacute;ver];
 	}
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Talk Like a Pirate Day")) {
-		extramonsters["Wanderering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
+		extramonsters["Wandering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
 	
 
-	
 	// free combat from familiar
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
 		extramonsters["Familiar Combats"]["Mini-Hipster"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[angry bassist, blue-haired girl, evil ex-girlfriend, peeved roommate, random scenester];
@@ -124,13 +152,10 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	}
 	
 	
-	
-	
 	// cleesh
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
 		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
 	}
-	
 	
 	
 	// deck of every card
@@ -225,8 +250,6 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Bugbear Invasion"]["The Penultimate Fantasy Airship"][""] = $monsters[Battlesuit Bugbear Type];
 		extramonsters["path: Bugbear Invasion"]["The Haunted Gallery"][""] = $monsters[ancient unspeakable bugbear];
 		extramonsters["path: Bugbear Invasion"]["The Battlefield (Frat Warrior Fatigues) or Bombed Hippy Camp or Bombed Frat House"][""] = $monsters[trendy bugbear chef];
-		
-		
 	}
 	
 	
