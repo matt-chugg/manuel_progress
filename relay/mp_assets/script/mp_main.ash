@@ -69,7 +69,6 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 	foreach mob in $monsters[] {
 		string l = "other";
 		
-		
 		// still ignore ultrarare
 		if(index_of(mob.attributes.to_lower_case(),"ultrarare") > -1) {
 			l = "No Factoid - UR";
@@ -95,11 +94,13 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 		}
 		
 		// butts
-		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt] contains mob) {
+		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt,Hotstuff's Butt] contains mob) {
 			l = "other butts";
 		}
 		
-		
+		if($monsters[mutant gila monster,mutant rattlesnake,mutant saguaro,swarm of mutant fire ants] contains mob) {
+			l = "Halloween XX";
+		}
 		
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
@@ -125,7 +126,10 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	extramonsters["BRICKO Monsters"]["BRICKO"][""] = $monsters[BRICKO Airship, BRICKO Bat, BRICKO Cathedral, BRICKO Elephant, BRICKO Gargantuchicken, BRICKO Octopus, BRICKO Ooze, BRICKO Oyster, BRICKO Python, BRICKO Turtle, BRICKO Vacuum Cleaner];
 	
 	// black pudding
-	extramonsters["MISC"]["Eating"]["Occurs randomly when eating black puddings"] = $monsters[black pudding];
+	extramonsters["MISC"]["Food"]["Occurs randomly when eating black puddings"] = $monsters[black pudding];
+	
+	// family of kobolds
+	extramonsters["MISC"]["Item"]["Occurs when multi-using 100 d4 at once (which are consumed)."] = $monsters[family of kobolds];
 	
 	// butts
 	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[your butt,somebody else's butt];
@@ -135,7 +139,6 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	
 	// nemesis wandering monsters
 	extramonsters["Wandering Monsters"]["Nemesis assassins"]["thugs sent after you by your Nemesis."] = $monsters[menacing thug,Mob Penguin hitman,hunting seal,Argarggagarg the Dire Hellseal,turtle trapper,Safari Jack\, Small-Game Hunter,evil spaghetti cult assassin,Yakisoba the Executioner,b&eacute;arnaise zombie,Heimandatz\, Nacho Golem,flock of seagulls,Jocko Homo,mariachi bandolero,The Mariachi With No Name];
-	
 	
 	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
@@ -148,6 +151,10 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Wandering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
 	
+	// drunksgiving
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Drunksgiving")) {
+		extramonsters["Wandering Monsters"]["Drunksgiving"]["Wandering"] = $monsters[Inebriated Tofurkey,Hammered Yam Golem,Plastered Can of Cranberry Sauce,Soused Stuffing Golem];
+	}
 
 	// free combat from familiar
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
@@ -157,19 +164,16 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
 	}
 	
-	
 	// cleesh
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
 		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
 	}
-	
 	
 	// deck of every card
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
 		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"IV - The Emperor\""] = $monsters[The Emperor];
 		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"Green Card\""] = $monsters[legal alien];
 	}
-	
 	
 	// odd and even ascensions // show ALL hole in the sky monsters unless mskc_mp_hide_unavailable_areas == true
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {		
@@ -181,9 +185,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 			extramonsters["Beanstalk"]["The Hole in the Sky (even ascension)"]["Only available in even ascensions"]  = $monsters[Burrowing Bishop,Family Jewels,Hooded Warrior,Junk,One-Eyed Willie,Pork Sword,Skinflute,Trouser Snake,Twig and Berries];
 		}
 	}
-	
 
-	
 	// bees hate you
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bees Hate You")) {
 		// wanderers
@@ -217,17 +219,31 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Actually Ed the Undying"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Actually Ed the Undying"] = $monsters[You the Adventurer];
 	}
 	
-	
 	// zombie slayer
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Zombie Slayer")) {
 		extramonsters["path: Zombie Slayer"]["Wanderering Monsters"]["Wandering: every ? turns based on level ?"] = $monsters[Norville Rogers,Peacannon,Scott the Miner,Father McGruber,Herman East\, Relivinator,Angry Space Marine,Deputy Nick Soames & Earl,Father Nikolai Ravonovich,Charity the Zombie Hunter,Special Agent Wallace Burke Corrigan,Hank North\, Photojournalist,rag-tag band of survivors,The Free Man,Wesley J. "Wes" Campbell,zombie-huntin' feller];
 		extramonsters["path: Zombie Slayer"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Zombie Slayer"] = $monsters[Rene C. Corman];
 	}
 	
-
 	//Way of the Stunning Fist
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Way of the Stunning Fist")) {
 		extramonsters["path: Way of the Stunning Fist"]["The Black Market"]["Beat up the shopkeeper"] = $monsters[Wu Tang the Betrayer];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Seal Clubber")) {
+		// summon seals
+		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of a cute baby seal"] = $monsters[broodling seal];
+		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of an armored seal"] = $monsters[Centurion of Sparky];
+		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of an ancient seal"] = $monsters[hermetic seal];
+		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of a wretched-looking seal"] = $monsters[Spawn of Wally];
+		
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a charred seal"] = $monsters[heat seal];
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a cold seal"] = $monsters[navy seal];
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a stinking seal"] = $monsters[Servant of Grodstank];
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a shadowy seal"] = $monsters[shadow of Black Bubbles];
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a sleek seal"] = $monsters[watertight seal];
+		extramonsters["Seal Clubber"]["Infernal Seals (greater)"]["figurine of a slippery seal"] = $monsters[wet seal];
+		
 	}
 
 	//Avatar of Boris
