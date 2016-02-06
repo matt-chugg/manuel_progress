@@ -94,6 +94,12 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "No Factoid - old content";
 		}
 		
+		// butts
+		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt] contains mob) {
+			l = "other butts";
+		}
+		
+		
 		
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
@@ -122,7 +128,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	extramonsters["MISC"]["Eating"]["Occurs randomly when eating black puddings"] = $monsters[black pudding];
 	
 	// butts
-	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt,somebody else's butt];
+	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[your butt,somebody else's butt];
 	
 	// transmission from planet Xi
 	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
@@ -175,6 +181,8 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 			extramonsters["Beanstalk"]["The Hole in the Sky (even ascension)"]["Only available in even ascensions"]  = $monsters[Burrowing Bishop,Family Jewels,Hooded Warrior,Junk,One-Eyed Willie,Pork Sword,Skinflute,Trouser Snake,Twig and Berries];
 		}
 	}
+	
+
 	
 	// bees hate you
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Bees Hate You")) {
@@ -312,6 +320,14 @@ monster_item[int] get_monsters() {
 				}
 			}
 			
+			if(l == $location[The Enormous Greater-Than Sign] && get_property("lastPlusSignUnlock").to_int() == my_ascensions() ) {
+				continue;
+			}
+			
+			if(l == $location[The Dungeons of Doom] && get_property("lastPlusSignUnlock").to_int() < my_ascensions()) {
+				continue;
+			}
+			 
 			// removed areas
 			if(l.parent.to_lower_case() == "removed" ) {continue;}
 		}
