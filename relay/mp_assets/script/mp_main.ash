@@ -74,7 +74,7 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "No Factoid - UR";
 		}
 		
-		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman] contains mob) {
+		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman,the frattlesnake,general seal,The Hermit] contains mob) {
 			l = "No Factoid - ?";
 		}
 		
@@ -93,6 +93,11 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "No Factoid - old content";
 		}
 		
+		// old ferns tower
+		if($monsters[giant pair of tweezers]  contains mob) {
+			l = "No Factoid - old content";
+		}
+		
 		// butts
 		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt,Hotstuff's Butt] contains mob) {
 			l = "other butts";
@@ -102,6 +107,12 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Halloween XX";
 		}
 		
+		if($monsters[Inebriated Tofurkey,Hammered Yam Golem,Plastered Can of Cranberry Sauce,Soused Stuffing Golem] contains mob) {
+			l = "Drunksgiving";
+		}
+		
+
+	
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
 			m.mp_monster_id = mob.id; 
@@ -134,11 +145,28 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	// butts
 	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[your butt,somebody else's butt];
 	
+	// deck of every card
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
+		extramonsters["MISC"]["Deck of Every Card"]["card \"IV - The Emperor\""] = $monsters[The Emperor];
+		extramonsters["MISC"]["Deck of Every Card"]["card \"Green Card\""] = $monsters[legal alien];
+	}
+	
+	// cleesh
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
+		extramonsters["MISC"]["Skill: CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
+	}
+	
+	// unleash nanites
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Nanorhino]))) {
+		extramonsters["MISC"]["Skill: Unleash Nanites"][""] = $monsters[little blob of gray goo,largish blob of gray goo,enormous blob of gray goo];
+	}
+	
+	// skull dozer
+	extramonsters["MISC"]["A Bone Garden"]["6th visit"] = $monsters[skulldozer];
+	extramonsters["MISC"]["Item"]["use shaking skull"] = $monsters[skulldozer];
+	
 	// transmission from planet Xi
 	extramonsters["KoL Con"]["transmission from planet Xi"][""]  = $monsters[holographic army, They, Xiblaxian political prisoner];
-	
-	// nemesis wandering monsters
-	extramonsters["Wandering Monsters"]["Nemesis assassins"]["thugs sent after you by your Nemesis."] = $monsters[menacing thug,Mob Penguin hitman,hunting seal,Argarggagarg the Dire Hellseal,turtle trapper,Safari Jack\, Small-Game Hunter,evil spaghetti cult assassin,Yakisoba the Executioner,b&eacute;arnaise zombie,Heimandatz\, Nacho Golem,flock of seagulls,Jocko Homo,mariachi bandolero,The Mariachi With No Name];
 	
 	// holidays wandering monsters
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Feast of Boris")) {
@@ -151,11 +179,13 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Wandering Monsters"]["Talk like a pirate day"]["Wandering: every 25-35 turns."] = $monsters[Ambulatory Pirate, Migratory Pirate, Peripatetic Pirate];
 	}
 	
-	// drunksgiving
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && holiday() != "Drunksgiving")) {
-		extramonsters["Wandering Monsters"]["Drunksgiving"]["Wandering"] = $monsters[Inebriated Tofurkey,Hammered Yam Golem,Plastered Can of Cranberry Sauce,Soused Stuffing Golem];
-	}
-
+	// nemesis wandering monsters
+	extramonsters["Wandering Monsters"]["Nemesis assassins"]["thugs sent after you by your Nemesis."] = $monsters[menacing thug,Mob Penguin hitman,hunting seal,Argarggagarg the Dire Hellseal,turtle trapper,Safari Jack\, Small-Game Hunter,evil spaghetti cult assassin,Yakisoba the Executioner,b&eacute;arnaise zombie,Heimandatz\, Nacho Golem,flock of seagulls,Jocko Homo,mariachi bandolero,The Mariachi With No Name];
+	
+	// Spelunky Area
+	extramonsters["Spelunky Area"]["Non combat"]["Occurs at The Mines, The Jungle, and The Ice Caves. Attack the shopkeeper"] = $monsters[shopkeeper];
+	
+	
 	// free combat from familiar
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_familiar($familiar[Mini-Hipster]))) {
 		extramonsters["Familiar Combats"]["Mini-Hipster"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[angry bassist, blue-haired girl, evil ex-girlfriend, peeved roommate, random scenester];
@@ -164,16 +194,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
 	}
 	
-	// cleesh
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && !have_skill($skill[CLEESH]))) {
-		extramonsters["Skills"]["CLEESH"]["Use skill CLEESH in combat"] = $monsters[Frog, Newt, Salamander];
-	}
-	
-	// deck of every card
-	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
-		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"IV - The Emperor\""] = $monsters[The Emperor];
-		extramonsters["Deck of Every Card "]["Deck of Every Card"]["card \"Green Card\""] = $monsters[legal alien];
-	}
+
 	
 	// odd and even ascensions // show ALL hole in the sky monsters unless mskc_mp_hide_unavailable_areas == true
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {		
@@ -275,6 +296,16 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Bugbear Invasion"]["The Haunted Gallery"][""] = $monsters[ancient unspeakable bugbear];
 		extramonsters["path: Bugbear Invasion"]["The Battlefield (Frat Warrior Fatigues) or Bombed Hippy Camp or Bombed Frat House"][""] = $monsters[trendy bugbear chef];
 	}
+	
+	// various removed things 
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {
+		// rock thing from july
+		extramonsters["Events"]["Rock thing, 2009"][""] = $monsters[rock homunculus,rock snake,clod hopper];
+		
+		//swarm of fudgewasps
+		extramonsters["The Candy Diorama"]["Fudge Mountain"]["choice:Fudge Mountain Breakdown"] = $monsters[swarm of fudgewasps];
+	}
+	
 	
 	
 	foreach z,l,i,mob in extramonsters {
