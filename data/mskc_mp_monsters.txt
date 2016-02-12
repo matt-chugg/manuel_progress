@@ -16,3 +16,9 @@ white elephant@Whitey's Grove	special	use 1 <strong>white page</strong> and choo
 The Frattlesnake@Frat House	removed	no longer available, may come back?
 X-32-F Combat Training Snowman@The X-32-F Combat Training Snowman	nofactoid	doesn't appear to have any factoids
 All-Hallow's Steve@Trick-or-Treating	nofactoid	doesn't appear to have any factoids
+wild seahorse@The Coral Corral	nofactoid	doesn't appear to have any factoids
+slime1@The Slime Tube	nofactoid	not a real thing
+slime2@The Slime Tube	nofactoid	not a real thing
+slime3@The Slime Tube	nofactoid	not a real thing
+slime4@The Slime Tube	nofactoid	not a real thing
+slime5@The Slime Tube	nofactoid	not a real thing

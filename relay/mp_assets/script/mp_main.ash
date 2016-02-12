@@ -74,7 +74,7 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "No Factoid - UR";
 		}
 		
-		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman,the frattlesnake,general seal,The Hermit] contains mob) {
+		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman,the frattlesnake,general seal,The Hermit,wild seahorse] contains mob) {
 			l = "No Factoid - ?";
 		}
 		
@@ -194,7 +194,8 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["Familiar Combats"]["Artistic Goth Kid"]["The odds of encountering a free combat are 50/40/30/20/10/10/10"] = $monsters[Black Crayon Beast, Black Crayon Beetle, Black Crayon Constellation, Black Crayon Crimbo Elf, Black Crayon Demon, Black Crayon Elemental, Black Crayon Fish, Black Crayon Flower, Black Crayon Frat Orc, Black Crayon Goblin, Black Crayon Golem, Black Crayon Hippy, Black Crayon Hobo, Black Crayon Man, Black Crayon Manloid, Black Crayon Mer-kin, Black Crayon Penguin, Black Crayon Pirate, Black Crayon Shambling Monstrosity, Black Crayon Slime, Black Crayon Spiraling Shape, Black Crayon Undead Thing];
 	}
 	
-
+	// and slime tube monster to slime tube
+	extramonsters["Clan Basement"]["The Slime Tube"]["Any of the slime tube monsters.."] = $monsters[Slime Tube monster];
 	
 	// odd and even ascensions // show ALL hole in the sky monsters unless mskc_mp_hide_unavailable_areas == true
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {		
@@ -367,11 +368,21 @@ monster_item[int] get_monsters() {
 				}
 			}
 			
+			// dungeons of doom and enourmous greter than
 			if(l == $location[The Enormous Greater-Than Sign] && get_property("lastPlusSignUnlock").to_int() == my_ascensions() ) {
 				continue;
 			}
-			
 			if(l == $location[The Dungeons of Doom] && get_property("lastPlusSignUnlock").to_int() < my_ascensions()) {
+				continue;
+			}
+			
+			// road to the white citadel
+			if(l == $location[The Road to the White Citadel] && (get_property("questG02Whitecastle") == "unstarted" || get_property("questG02Whitecastle") == "step10" || get_property("questG02Whitecastle") == "finished")) {
+				continue;
+			}
+			
+			// Whitey's Grove
+			if(l == $location[Whitey's Grove] && (get_property("questG02Whitecastle") == "unstarted" && (get_property("questL11Palindome") == "unstarted" || get_property("questL11Palindome") == "step1" || get_property("questL11Palindome") == "step2" || get_property("questL11Palindome") == "step3"))) {
 				continue;
 			}
 			 
