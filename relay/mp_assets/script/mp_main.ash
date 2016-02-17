@@ -74,7 +74,7 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "No Factoid - UR";
 		}
 		
-		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman,the frattlesnake,general seal,The Hermit,wild seahorse] contains mob) {
+		if($monsters[All-Hallow's Steve,X-32-F Combat Training Snowman,the frattlesnake,general seal,The Hermit,wild seahorse,Edwing Abbidriel] contains mob) {
 			l = "No Factoid - ?";
 		}
 		
@@ -90,6 +90,10 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 		
 		// nightstands
 		if($monsters[animated nightstand (mahogany combat),animated nightstand (mahogany noncombat),animated nightstand (white combat),animated nightstand (white noncombat)] contains mob) {
+			l = "No Factoid - old content";
+		}
+		
+		if($monsters[possessed wine rack (obsolete),ancient protector spirit (obsolete),Astronomer (obsolete),possessed wine rack (obsolete),skeletal sommelier (obsolete)] contains mob) {
 			l = "No Factoid - old content";
 		}
 		
@@ -111,7 +115,19 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Drunksgiving";
 		}
 		
-
+		if($monsters[slime1,slime2,slime3,slime4,slime5]  contains mob) {
+			l = "slime tube monster versions (no factoid)";
+		}
+		
+		//Ed the Undying
+		if($monsters[Ed the Undying (1),Ed the Undying (2),Ed the Undying (3),Ed the Undying (4),Ed the Undying (5),Ed the Undying (6),Ed the Undying (7)]  contains mob) {
+			l = "Ed versions";
+		}
+		
+		// old tower
+		if($monsters[Beer Batter, best-selling novelist, Big Meat Golem, Bowling Cricket, Bronze Chef, collapsed mineshaft golem, concert pianist, darkness, El Diablo, Electron Submarine, endangered inflatable white tiger, Enraged Cow, fancy bath slug, Fickle Finger of F8, Flaming Samurai, giant bee, Giant Desktop Globe, giant fried egg, Ice Cube, malevolent crop circle, possessed pipe-organ, Pretty Fly, Tyrannosaurus Tex, Vicious Easel]  contains mob) {
+			l = "Old Tower";
+		}
 	
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
@@ -144,6 +160,9 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	
 	// butts
 	extramonsters["MISC"]["Butts"]["portable photocopier"] = $monsters[your butt,somebody else's butt];
+	
+	// The Lower Chambers ed
+	extramonsters["Pyramid"]["The Lower Chambers"]["Boss."] = $monsters[Ed the Undying];
 	
 	// deck of every card
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && item_amount($item[Deck of Every Card]) ==0)) {
@@ -229,6 +248,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Heavy Rains"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Heavy Rains"] =$monsters[The Aquaman];
 		extramonsters["path: Heavy Rains"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Heavy Rains"] =   $monsters[Big Wisnaqua];
 		extramonsters["path: Heavy Rains"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Heavy Rains"] = $monsters[The Rain King];
+		extramonsters["path: Heavy Rains"]["Summoning Chamber"]["Replaces Lord Spookyraven during a Heavy Rains Ascension."] = $monsters[Lord Soggyraven];
 	}
 	
 	// ed the undying
@@ -307,6 +327,32 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["The Candy Diorama"]["Fudge Mountain"]["choice:Fudge Mountain Breakdown"] = $monsters[swarm of fudgewasps];
 	}
 	
+	// nemesis
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Seal Clubber")) {
+		extramonsters["Volcano"]["Lair: Seal Clubber"][""] = $monsters[hellseal guardian,Gorgolok\, the Demonic Hellseal,Gorgolok\, the Infernal Seal (Inner Sanctum),Gorgolok\, the Infernal Seal (The Nemesis\' Lair),Gorgolok\, the Infernal Seal (Volcanic Cave)];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Turtle Tamer")) {
+		extramonsters["Volcano"]["Lair: Turtle Tamer"][""] = $monsters[warehouse worker,Stella\, the Demonic Turtle Poacher,Stella\, the Turtle Poacher (Inner Sanctum),Stella\, the Turtle Poacher (The Nemesis\' Lair),Stella\, the Turtle Poacher (Volcanic Cave)];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Pastamancer")) {
+		extramonsters["Volcano"]["Lair: Pastamancer"][""] = $monsters[evil spaghetti cult zealot,Spaghetti Demon,Spaghetti Elemental (Inner Sanctum),Spaghetti Elemental (The Nemesis' Lair),Spaghetti Elemental (Volcanic Cave)];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Sauceror")) {
+		extramonsters["Volcano"]["Lair: Sauceror"][""] = $monsters[security slime,Lumpy\, the Demonic Sauceblob,Lumpy\, the Sinister Sauceblob (Inner Sanctum),Lumpy\, the Sinister Sauceblob (The Nemesis' Lair),Lumpy\, the Sinister Sauceblob (Volcanic Cave)];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Disco Bandit")) {
+		extramonsters["Volcano"]["Lair: Disco Bandit"][""] = $monsters[daft punk,Demon of New Wave,Spirit of New Wave (Inner Sanctum),Spirit of New Wave (The Nemesis' Lair),Spirit of New Wave (Volcanic Cave)];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Accordion Thief")) {
+		extramonsters["Volcano"]["Lair: Accordion Thief"][""] = $monsters[mariachi bruiser,Somerset Lopez\, Demon Mariachi,Somerset Lopez\, Dread Mariachi (The Nemesis\' Lair),Somerset Lopez\, Dread Mariachi (Volcanic Cave),Somerset Lopez\, Dread Mariachi (Inner Sanctum)];
+	}
+	
+	
 	
 	
 	foreach z,l,i,mob in extramonsters {
@@ -338,6 +384,11 @@ monster_item[int] get_monsters() {
 	
 	foreach l in $locations[] {
 
+		// ignore nemesis lair, added back in later per class
+		if(l == $location[The Nemesis' Lair]) {
+			continue;
+		}
+	
 		// hide some inaccessible areas
 		if(get_property("mskc_mp_hide_unavailable_areas") == true) {
 			// paths
