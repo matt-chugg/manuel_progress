@@ -129,6 +129,10 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Old Tower";
 		}
 	
+		if(get_property("mskc_mp_clean_unseen_monsters") == true && l !="other") {
+			continue;
+		}
+	
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
 			m.mp_monster_id = mob.id; 
@@ -303,6 +307,13 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	//Avatar of Sneaky Pete
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of Sneaky Pete")) {
 		extramonsters["path: Avatar of Sneaky Pete"]["The Naughty Sorceress' Chamber"]["?"] = $monsters[The Avatar of Jarlsberg];
+	}
+	
+	//Avatar of West of Loathing
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of West of Loathing")) {
+		extramonsters["path: Avatar of West of Loathing"]["Wanderering Monsters (level 1-5)"]["every 15-20 adventures"] = $monsters[furious cow,emaciated rodeo clown,aggressive grass snake];
+		extramonsters["path: Avatar of West of Loathing"]["Wanderering Monsters (level 6-8)"]["every 15-20 adventures"] = $monsters[furious giant cow,menacing rodeo clown,prince snake];
+		extramonsters["path: Avatar of West of Loathing"]["Wanderering Monsters (level 9+)"]["every 15-20 adventures"] = $monsters[ungulith,grizzled rodeo clown,king snake];
 	}
 	
 	//Bugbear Invasion
