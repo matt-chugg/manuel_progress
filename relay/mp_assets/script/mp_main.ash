@@ -103,7 +103,7 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 		}
 		
 		// butts
-		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Mr. Skullhead's Butt,Multi Czar's Butt,Riff's Butt,Hotstuff's Butt] contains mob) {
+		if($monsters[CDMoyer's Butt,Jick's Butt,Riff's Butt,Multi Czar's Butt,Riff's Butt,Hotstuff's Butt] contains mob) {
 			l = "other butts";
 		}
 		
@@ -115,9 +115,10 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Drunksgiving";
 		}
 		
-		if($monsters[slime1,slime2,slime3,slime4,slime5]  contains mob) {
-			l = "slime tube monster versions (no factoid)";
-		}
+		//
+		//if($monsters[slime1,slime2,slime3,slime4,slime5]  contains mob) {
+		//	l = "slime tube monster versions (no factoid)";
+		//}
 		
 		//Ed the Undying
 		if($monsters[Ed the Undying (1),Ed the Undying (2),Ed the Undying (3),Ed the Undying (4),Ed the Undying (5),Ed the Undying (6),Ed the Undying (7)]  contains mob) {
