@@ -115,10 +115,6 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Drunksgiving";
 		}
 		
-		//
-		//if($monsters[slime1,slime2,slime3,slime4,slime5]  contains mob) {
-		//	l = "slime tube monster versions (no factoid)";
-		//}
 		
 		//Ed the Undying
 		if($monsters[Ed the Undying (1),Ed the Undying (2),Ed the Undying (3),Ed the Undying (4),Ed the Undying (5),Ed the Undying (6),Ed the Undying (7)]  contains mob) {
@@ -130,9 +126,6 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Old Tower";
 		}
 	
-		if(get_property("mskc_mp_clean_unseen_monsters") == true && l !="other") {
-			continue;
-		}
 	
 		if(!(seen_monsters contains mob)) {
 			monster_item m;
@@ -517,10 +510,9 @@ monster_item[int] get_monsters() {
 	// add extras
 	monster_items = add_extra_monsters(monster_items);
 	
-	// add any monsters that are not already in the list.
-	if(get_property("mskc_mp_show_unseen_monsters") == true) {
-		monster_items = add_unseen_monsters(monster_items);
-	}
+	// add monsters that aren't location based but in kols data file of monsters
+	monster_items = add_unseen_monsters(monster_items);
+
 	
 	
 	// return full list of monsters
