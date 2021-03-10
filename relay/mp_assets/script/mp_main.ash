@@ -121,6 +121,8 @@ monster_item[int] add_unseen_monsters(monster_item[int] monster_items) {
 			l = "Ed versions";
 		}
 		
+		
+		
 		// old tower
 		if($monsters[Beer Batter, best-selling novelist, Big Meat Golem, Bowling Cricket, Bronze Chef, collapsed mineshaft golem, concert pianist, darkness, El Diablo, Electron Submarine, endangered inflatable white tiger, Enraged Cow, fancy bath slug, Fickle Finger of F8, Flaming Samurai, giant bee, Giant Desktop Globe, giant fried egg, Ice Cube, malevolent crop circle, possessed pipe-organ, Pretty Fly, Tyrannosaurus Tex, Vicious Easel]  contains mob) {
 			l = "Old Tower";
@@ -321,6 +323,22 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Bugbear Invasion"]["The Penultimate Fantasy Airship"][""] = $monsters[Battlesuit Bugbear Type];
 		extramonsters["path: Bugbear Invasion"]["The Haunted Gallery"][""] = $monsters[ancient unspeakable bugbear];
 		extramonsters["path: Bugbear Invasion"]["The Battlefield (Frat Warrior Fatigues) or Bombed Hippy Camp or Bombed Frat House"][""] = $monsters[trendy bugbear chef];
+	}
+	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "You, Robot")) {
+		
+		extramonsters["path: You, Robot"]["The Boss Bat's Lair"]["Replaces boss bat in You, Robot"] = $monsters[Boss Bot];
+		extramonsters["path: You, Robot"]["Throne Room"]["Replaces knob goblin king in You, Robot"] = $monsters[Gobot King];
+		extramonsters["path: You, Robot"]["Haert of the Cyrpt"]["Replaces Bonerdagon in You, Robot"] = $monsters[Robonerdagon];
+		extramonsters["path: You, Robot"]["Mist-Shrouded Peak"]["Replaces Groar in  You, Robot"] = $monsters[Groarbot];
+		extramonsters["path: You, Robot"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in You, Robot"] = $monsters[Nautomatic Sorceress];
+		
+		extramonsters["path: You, Robot"]["Dr. Awkward's Office"]["Replaces Dr. Awkward in You, Robot"] = $monsters[Tobias J. Saibot];
+		extramonsters["path: You, Robot"]["Summoning Chamber"]["Replaces Lord Spookyraven in You, Robot"] = $monsters[Lord Cyberraven];
+		extramonsters["path: You, Robot"]["A Massive Ziggurat"]["Replaces Protector Spectre in You, Robot"] = $monsters[Protector S. P. E. C. T. R. E.];
+		extramonsters["path: You, Robot"][" The Hippy Camp (Wartime)"]["Replaces The Big Wisniewski in You, Robot"] = $monsters[The Artificial Wisniewski];
+		extramonsters["path: You, Robot"]["The Orcish Frat House (Wartime)"]["Replaces The Man in You, Robot"] = $monsters[The Android];
+
 	}
 	
 	// various removed things 
