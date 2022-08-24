@@ -272,6 +272,39 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Way of the Stunning Fist"]["The Black Market"]["Beat up the shopkeeper"] = $monsters[Wu Tang the Betrayer];
 	}
 	
+	
+		// wildfire
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Wildfire")) {		
+		// boss replacement
+		extramonsters["path: Wildfire"]["The Boss Bat's Lair"]["Replaces boss bat in Wildfire"] = $monsters[Blaze Bat];
+		extramonsters["path: Wildfire"]["Throne Room"]["Replaces knob goblin king in Wildfire"] = $monsters[fired-up Knob Goblin King];
+		extramonsters["path: Wildfire"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Wildfire"] = $monsters[Burnerdagon];
+		extramonsters["path: Wildfire"]["Mist-Shrouded Peak"]["Replaces Groar in Wildfire"] = $monsters[Groar\, Except Hot];
+		
+		extramonsters["path: Wildfire"]["Inside the Palindome"]["Replaces Dr. Awkward in Wildfire"] = $monsters[Dr. Awkward\, who is on fire];
+		extramonsters["path: Wildfire"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Wildfire"] =$monsters[The Man on Fire];
+		extramonsters["path: Wildfire"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Wildfire"] =   $monsters[The Big Ignatowicz];
+		extramonsters["path: Wildfire"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Wildfire"] = $monsters[The Naughty Scorcheress];
+		extramonsters["path: Wildfire"]["Summoning Chamber"]["Replaces Lord Spookyraven in Wildfire"] = $monsters[Lord Sootyraven];
+	}
+	
+	// dinos
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Fall of the Dinosaurs")) {		
+		// boss replacement
+		extramonsters["path: Fall of the Dinosaurs"]["The Boss Bat's Lair"]["Replaces boss bat in Fall of the Dinosaurs"] = $monsters[two-headed pteranodon with a two-headed bat inside it];
+		extramonsters["path: Fall of the Dinosaurs"]["Throne Room"]["Replaces knob goblin king in Fall of the Dinosaurs"] = $monsters[goblodocus];
+		extramonsters["path: Fall of the Dinosaurs"]["Haert of the Cyrpt"]["Replaces Bonerdagon in Fall of the Dinosaurs"] = $monsters[T-Rex who ate the Bonerdagon];
+		extramonsters["path: Fall of the Dinosaurs"]["Mist-Shrouded Peak"]["Replaces Groar in Fall of the Dinosaurs"] = $monsters[refrigeradon];
+		
+		extramonsters["path: Fall of the Dinosaurs"]["A Massive Ziggurat"]["Replaces Protector Spectre in Fall of the Dinosaurs"] = $monsters[protoceratops spectre];
+		
+		extramonsters["path: Fall of the Dinosaurs"]["Inside the Palindome"]["Replaces Dr. Awkward in Fall of the Dinosaurs"] = $monsters[suruasaurus];
+		extramonsters["path: Fall of the Dinosaurs"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in Fall of the Dinosaurs"] = $monsters[Oligarcheopteryx];
+		extramonsters["path: Fall of the Dinosaurs"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in Fall of the Dinosaurs"] =   $monsters[Slackiosaurus];
+		extramonsters["path: Fall of the Dinosaurs"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Fall of the Dinosaurs"] = $monsters[Naughty Saursaurus];
+		extramonsters["path: Fall of the Dinosaurs"]["Summoning Chamber"]["Replaces Lord Spookyraven in Fall of the Dinosaurs"] = $monsters[herd of well-fed microraptors];
+	}
+	
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Seal Clubber")) {
 		// summon seals
 		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of a cute baby seal"] = $monsters[broodling seal];
@@ -485,11 +518,26 @@ monster_item[int] get_monsters() {
 			m.mp_location_name = l.to_string();
 			m.mp_zone_name = l.zone;
 			m.mp_factoids = monster_factoids_available(mob,true);
-			m.mp_frequency = freq;
+		
 			m.mp_semirare = index_of(mob.attributes.to_lower_case(),"semirare") > -1;
 			m.mp_boss = mob.boss;
 			m.mp_special = false;
 			m.mp_information = "";
+			
+
+		   switch {
+		   case mob == $monster[none]:
+			  m.mp_frequency = 0;
+			  break;
+		   case freq > 0:
+		   case freq == 0:
+		   case freq < 0:
+			  m.mp_frequency = freq;
+			  break;
+		   default:
+				m.mp_frequency = 0;
+			  break;
+		   }
 			
 			// check for special cases
 			string mal = mob.to_string()+"@"+l.to_string();
