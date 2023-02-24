@@ -305,6 +305,27 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Fall of the Dinosaurs"]["Summoning Chamber"]["Replaces Lord Spookyraven in Fall of the Dinosaurs"] = $monsters[herd of well-fed microraptors];
 	}
 	
+		// AOSOL
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Avatar of Shadows Over Loathing")) {		
+		// boss replacement
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Boss Bat's Lair"]["Replaces boss bat in AOSOL"] = $monsters[two-headed shadow bat];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["Throne Room"]["Replaces knob goblin king in AOSOL"] = $monsters[goblin king's shadow];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["Haert of the Cyrpt"]["Replaces Bonerdagon in AOSOL"] = $monsters[shadowboner shadowdagon];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["Mist-Shrouded Peak"]["Replaces Groar in FAOSOL"] = $monsters[shadow of groar];
+		
+		extramonsters["path: Avatar of Shadows Over Loathing"]["A Massive Ziggurat"]["Replaces Protector Spectre in AOSOL"] = $monsters[corruptor shadow];
+		
+		extramonsters["path: Avatar of Shadows Over Loathing"]["Inside the Palindome"]["Replaces Dr. Awkward in AOSOL"] = $monsters[W. Odah's Shadow];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in AOSOL"] = $monsters[shadow of the 1980s];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in AOSOL"] =   $monsters[shadow of the 1960s];
+
+		extramonsters["path: Avatar of Shadows Over Loathing"]["Summoning Chamber"]["Replaces Lord Spookyraven in AOSOL"] = $monsters[shadow Lord Spookyraven];
+		
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Naughty Sorceress' Chamber"]["Replaces The NS in AOSOL (Pig Skinner)"] = $monsters[General Bruise];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Naughty Sorceress' Chamber"]["Replaces The NS in AOSOL (Jazz Agent)"] = $monsters[Terrence Poindexter];
+		extramonsters["path: Avatar of Shadows Over Loathing"]["The Naughty Sorceress' Chamber"]["Replaces The NS in AOSOL (Cheese Wizard)"] = $monsters[Dark Noël];
+	}
+	
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_class().to_string() != "Seal Clubber")) {
 		// summon seals
 		extramonsters["Seal Clubber"]["Infernal Seals (lesser)"]["figurine of a cute baby seal"] = $monsters[broodling seal];
