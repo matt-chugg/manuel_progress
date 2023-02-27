@@ -1,4 +1,6 @@
 
+string version = "1.52";
+
 // record to hold a location and monster
 record monster_item {
 	string mp_monster_id;
@@ -683,7 +685,7 @@ void render_page() {
     finish_header();
 
     // header and content div
-    writeln("<header><h1>Manuel Progress R:" + svn_info( "matt-chugg-manuel_progress.git-trunk" ).revision + " - <span id=\"mp_progress\">0 : 0 : 0</span></h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><a class=\"mp_settings\">settings</a><div class=\"clear\">&nbsp;</div>" + render_settings() + "</header>");
+    writeln("<header><h1>Manuel Progress v:" + version + " - <span id=\"mp_progress\">0 : 0 : 0</span></h1><a id=\"jumpout\">-></a><a class=\"mp_refresh\">refresh all</a><a class=\"mp_settings\">settings</a><div class=\"clear\">&nbsp;</div>" + render_settings() + "</header>");
 	string content_class="";
 	if (get_property("mskc_mp_hide_completed_areas") == true) {content_class += "hide_completed_areas ";}
 	
