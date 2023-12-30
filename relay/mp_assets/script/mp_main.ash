@@ -1,5 +1,5 @@
 
-string version = "1.52";
+string version = "1.53";
 
 // record to hold a location and monster
 record monster_item {
