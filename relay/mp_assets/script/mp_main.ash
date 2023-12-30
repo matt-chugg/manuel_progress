@@ -266,7 +266,7 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 	// zombie slayer
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Zombie Slayer")) {
 		extramonsters["path: Zombie Slayer"]["Wanderering Monsters"]["Wandering: every ? turns based on level ?"] = $monsters[Norville Rogers,Peacannon,Scott the Miner,Father McGruber,Herman East\, Relivinator,Angry Space Marine,Deputy Nick Soames & Earl,Father Nikolai Ravonovich,Charity the Zombie Hunter,Special Agent Wallace Burke Corrigan,Hank North\, Photojournalist,rag-tag band of survivors,The Free Man,Wesley J. "Wes" Campbell,zombie-huntin' feller];
-		extramonsters["path: Zombie Slayer"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Zombie Slayer"] = $monsters[Rene C. Corman];
+		extramonsters["path: Zombie Slayer"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in Zombie Slayer"] = $monsters[Rene C. Corman (Zombie Slayer)];
 	}
 	
 	//Way of the Stunning Fist
