@@ -397,6 +397,23 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 
 	}
 	
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "WereProfessor")) {
+		
+		extramonsters["path: WereProfessor"]["The Boss Bat's Lair"]["Replaces boss bat in WereProfessor"] = $monsters[Boss Beast];
+		extramonsters["path: WereProfessor"]["Throne Room"]["Replaces knob goblin king in WereProfessor"] = $monsters[Knob Goblin Beast];
+		extramonsters["path: WereProfessor"]["Haert of the Cyrpt"]["Replaces Bonerdagon in WereProfessor"] = $monsters[Curséd Bonerdagon];
+		extramonsters["path: WereProfessor"]["Mist-Shrouded Peak"]["Replaces Groar in  WereProfessor"] = $monsters[Just Groar];
+		extramonsters["path: WereProfessor"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in WereProfessor"] = $monsters[The Naughty Wolferess];
+		
+		extramonsters["path: WereProfessor"]["Dr. Awkward's Office"]["Replaces Dr. Awkward in WereProfessor"] = $monsters[Were-Dr. Awkwarder\, ew];
+		extramonsters["path: WereProfessor"]["Summoning Chamber"]["Replaces Lord Spookyraven in WereProfessor"] = $monsters[Lord Beastlyraven];
+		extramonsters["path: WereProfessor"]["A Massive Ziggurat"]["Replaces Protector Spectre in WereProfessor"] = $monsters[Protector Beast];
+		extramonsters["path: WereProfessor"][" The Hippy Camp (Wartime)"]["Replaces The Big Wisniewski in WereProfessor"] = $monsters[The Beast Wisniewski];
+		extramonsters["path: WereProfessor"]["The Orcish Frat House (Wartime)"]["Replaces The Man in WereProfessor"] = $monsters[The Beastman];
+
+	}
+	
+	
 	// various removed things 
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true)) {
 		// rock thing from july
