@@ -253,6 +253,25 @@ monster_item[int] add_extra_monsters(monster_item[int] monster_items) {
 		extramonsters["path: Heavy Rains"]["Summoning Chamber"]["Replaces Lord Spookyraven during a Heavy Rains Ascension."] = $monsters[Lord Soggyraven];
 	}
 	
+		// Adventurer Meats World
+	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Adventurer Meats World")) {
+
+		
+		// boss replacements
+		extramonsters["path: Adventurer Meats World"]["The Boss Bat's Lair"]["Replaces boss bat in AMW"] = $monsters[Basted Boss Bat];
+		extramonsters["path: Adventurer Meats World"]["The Boss Bat's Lair"]["Replaces bodyguard bat in AMW"] = $monsters[Beef bodyguard bat];
+		
+		extramonsters["path: Adventurer Meats World"]["Throne Room"]["Replaces knob goblin king in AMW"] = $monsters[Gabogooblin King];
+		extramonsters["path: Adventurer Meats World"]["Haert of the Cyrpt"]["Replaces Bonerdagon in AMW"] = $monsters[The Maety Bonerdagon];
+		extramonsters["path: Adventurer Meats World"]["Mist-Shrouded Peak"]["Replaces Groar in AMW"] = $monsters[Groarst];
+		extramonsters["path: Adventurer Meats World"]["A Massive Ziggurat"]["Replaces Protector Spectre in AMW"] = $monsters[Protector Speck-ter];
+		extramonsters["path: Adventurer Meats World"]["Inside the Palindome"]["Replaces Dr. Awkward in AMW"] = $monsters[Feeble Dr. Awkward\, El Beef];
+		extramonsters["path: Adventurer Meats World"]["The Battlefield (Hippy Uniform)"]["Replaces The Man in AMW"] =$monsters[The Manwich];
+		extramonsters["path: Adventurer Meats World"]["The Battlefield (Frat Uniform)"]["Replaces The Big Wisniewski in AMW"] =   $monsters[The Big Mac Wisniewski];
+		extramonsters["path: Adventurer Meats World"]["The Naughty Sorceress' Chamber"]["Replaces The Naughty Sorceress in AMW"] = $monsters[Naughty Sorceress\, all sausage];
+		extramonsters["path: Adventurer Meats World"]["Summoning Chamber"]["Replaces Lord Spookyraven in AMW"] = $monsters[Lard Spookyraven];
+	}
+	
 	// ed the undying
 	if(!(get_property("mskc_mp_hide_unavailable_areas")==true && my_path() != "Actually Ed the Undying")) {		
 		// boss replacement
